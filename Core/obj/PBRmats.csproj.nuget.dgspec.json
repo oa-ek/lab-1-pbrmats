@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats\\PBRmats.Core.csproj": {}
+    "D:\\Study\\C#\\PBRmatsCore\\PBRmats\\PBRmats.csproj": {}
   },
   "projects": {
-    "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats\\PBRmats.Core.csproj": {
+    "D:\\Study\\C#\\PBRmatsCore\\PBRmats\\PBRmats.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats\\PBRmats.Core.csproj",
-        "projectName": "PBRmats.Core",
-        "projectPath": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats\\PBRmats.Core.csproj",
+        "projectUniqueName": "D:\\Study\\C#\\PBRmatsCore\\PBRmats\\PBRmats.csproj",
+        "projectName": "PBRmats",
+        "projectPath": "D:\\Study\\C#\\PBRmatsCore\\PBRmats\\PBRmats.csproj",
         "packagesPath": "C:\\Users\\valer\\.nuget\\packages\\",
-        "outputPath": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats\\obj\\",
+        "outputPath": "D:\\Study\\C#\\PBRmatsCore\\PBRmats\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "D:\\Programs\\VisualStudio\\SDKs\\NuGetPackages"
@@ -44,22 +44,6 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "dependencies": {
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[7.0.11, )"
-            },
-            "Microsoft.EntityFrameworkCore.SqlServer": {
-              "target": "Package",
-              "version": "[7.0.11, )"
-            },
-            "Microsoft.EntityFrameworkCore.Tools": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[7.0.11, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",

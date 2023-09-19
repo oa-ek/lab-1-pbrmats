@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = PBRmats.Core
-build_property.ProjectDir = D:\Study\C#\lab-1-pbrmats\PBRmats\
+build_property.ProjectDir = D:\Study\C#\lab-1-pbrmats\Core\
