@@ -28,6 +28,7 @@ namespace PBRmatsWeb
 
             builder.Services.AddScoped<IRepository<Material, int>, Repository<Material, int>>();
             builder.Services.AddScoped<IRepository<Category, int>, Repository<Category, int>>();
+            builder.Services.AddScoped<IRepository<License, int>, Repository<License, int>>();
 
             var app = builder.Build();
 

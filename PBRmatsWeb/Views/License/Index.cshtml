@@ -1,34 +1,28 @@
 ﻿@using PBRmats.Core.Entities
 
-@model IEnumerable<Material>
+@model IEnumerable<License>
 
 @{
-    ViewData["Title"] = "Editor Materials";
+    ViewData["Title"] = "Editor Licenses";
 }
 
-<h1>Materials</h1>
+<h1>Licenses</h1>
 
 <p class="btn btn-primary btn-sm">
-    <a class="text-light text-decoration-none" asp-action="Create">Create Material</a>
+    <a class="text-light text-decoration-none" asp-action="Create">Create License</a>
 </p>
 
 <table class ="table table-bordered text-light">
     <thead>
         <tr>
-            <th>Id</th>
             <th>Title</th>
-            <th>AvgColor</th>
-            <th>ReleaseDate</th>
         </tr>
     </thead>
     <tbody>
         @foreach(var m in Model)
         {
             <tr>
-                <td>@m.Id</td>
                 <td>@m.Title</td>
-                <td>@m.AvgColor</td>
-                <td>@m.ReleaseDate</td>
                 <td>
                     <a class="btn btn-outline-primary btn-sm" asp-action="Edit" asp-route-id="@m.Id">Edit</a>
                     <a class="btn btn-outline-danger btn-sm" asp-action="Delete" asp-route-id="@m.Id">Delete</a>
