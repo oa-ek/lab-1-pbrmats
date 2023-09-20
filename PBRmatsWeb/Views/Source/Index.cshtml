@@ -1,0 +1,33 @@
+﻿@using PBRmats.Core.Entities
+
+@model IEnumerable<Source>
+
+@{
+    ViewData["Title"] = "Editor Sources";
+}
+
+<h1>Sources</h1>
+
+<p class="btn btn-primary btn-sm">
+    <a class="text-light text-decoration-none" asp-action="Create">Create Source</a>
+</p>
+
+<table class ="table table-bordered text-light">
+    <thead>
+        <tr>
+            <th>Title</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var m in Model)
+        {
+            <tr>
+                <td>@m.Title</td>
+                <td>
+                    <a class="btn btn-outline-primary btn-sm" asp-action="Edit" asp-route-id="@m.Id">Edit</a>
+                    <a class="btn btn-outline-danger btn-sm" asp-action="Delete" asp-route-id="@m.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
