@@ -4,8 +4,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using PBRmatsCore.Context;
-
+using PBRmats.Core.Context;
 #nullable disable
 
 namespace PBRmats.Core.Migrations

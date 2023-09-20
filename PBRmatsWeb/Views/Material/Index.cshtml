@@ -1,0 +1,39 @@
+﻿@using PBRmats.Core.Entities
+
+@model IEnumerable<Material>
+
+@{
+    ViewData["Title"] = "Editor Materials";
+}
+
+<h1>Materials</h1>
+
+<p>
+    <a asp-action="Create">Create Material</a>
+</p>
+
+<table class ="table table-bordered text-light">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>AvgColor</th>
+            <th>ReleaseDate</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var m in Model)
+        {
+            <tr>
+                <td>@m.Id</td>
+                <td>@m.Title</td>
+                <td>@m.AvgColor</td>
+                <td>@m.ReleaseDate</td>
+                <td>
+                    <a class="btn btn-outline-primary btn-sm" asp-action="Edit" asp-route-id="@m.Id">Edit</a>
+                    <a class="btn btn-outline-danger btn-sm" asp-action="Delete" asp-route-id="@m.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

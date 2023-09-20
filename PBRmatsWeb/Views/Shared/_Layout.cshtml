@@ -18,6 +18,15 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Material" asp-action="Index">MaterialsEditor</a>
+                        </li>
+                        <li>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Category" asp-action="Index">CategoriesEditor</a>
+                        </li>
+                    </ul>
+
                     <partial name="_LoginPartial" />
                 </div>
             </div>

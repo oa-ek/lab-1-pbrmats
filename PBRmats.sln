@@ -5,7 +5,9 @@ VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PBRmats.Core", "Core\PBRmats.Core.csproj", "{7D074A81-33DF-4910-BFCD-7BD504D34B47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PBRmatsWeb", "PBRmatsWeb\PBRmatsWeb.csproj", "{51C4517B-5BB3-4805-BF66-F7A2EC369970}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PBRmatsWeb", "PBRmatsWeb\PBRmatsWeb.csproj", "{51C4517B-5BB3-4805-BF66-F7A2EC369970}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PBRmats.Repositories", "PBRmats.Repositories\PBRmats.Repositories.csproj", "{0C18FD03-0062-4597-B3E4-E9E6BEF4E9BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{51C4517B-5BB3-4805-BF66-F7A2EC369970}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51C4517B-5BB3-4805-BF66-F7A2EC369970}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51C4517B-5BB3-4805-BF66-F7A2EC369970}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C18FD03-0062-4597-B3E4-E9E6BEF4E9BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C18FD03-0062-4597-B3E4-E9E6BEF4E9BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C18FD03-0062-4597-B3E4-E9E6BEF4E9BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C18FD03-0062-4597-B3E4-E9E6BEF4E9BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

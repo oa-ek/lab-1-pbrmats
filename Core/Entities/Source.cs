@@ -8,11 +8,8 @@ using System.Threading.Tasks;
 
 namespace PBRmats.Core.Entities
 {
-    public class Source
+    public class Source : Entity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
         public string Title { get; set; } = string.Empty;
     }
 }

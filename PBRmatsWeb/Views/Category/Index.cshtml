@@ -1,0 +1,33 @@
+﻿@using PBRmats.Core.Entities
+
+@model IEnumerable<Category>
+
+@{
+    ViewData["Title"] = "Editor Categories";
+}
+
+<h1>Categories</h1>
+
+<p>
+    <a asp-action="Create">Create Category</a>
+</p>
+
+<table class ="table table-bordered text-light">
+    <thead>
+        <tr>
+            <th>Title</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var m in Model)
+        {
+            <tr>
+                <td>@m.Title</td>
+                <td>
+                    <a class="btn btn-outline-primary btn-sm" asp-action="Edit" asp-route-id="@m.Id">Edit</a>
+                    <a class="btn btn-outline-danger btn-sm" asp-action="Delete" asp-route-id="@m.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

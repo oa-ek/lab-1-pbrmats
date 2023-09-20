@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using PBRmatsWeb.Data;
+using NuGet.Protocol.Core.Types;
+using PBRmats.Core.Entities;
+using PBRmats.Repositories.Interfaces;
+using PBRmats.Repositories.Repos;
 
 namespace PBRmatsWeb
 {
@@ -12,15 +15,19 @@ namespace PBRmatsWeb
 
             // Add services to the container.
             var connectionString = builder.Configuration.GetConnectionString("PBRmatsConnection") ?? 
-                throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+                throw new InvalidOperationException("Connection string 'PBRmatsConnection' not found.");
 
-            builder.Services.AddDbContext<PBRmatsContext>(options =>
+            builder.Services.AddDbContext<PBRmats.Core.Context.PBRmatsContext>(options =>
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<PBRmatsContext>();
+                .AddEntityFrameworkStores<PBRmats.Core.Context.PBRmatsContext>();
+
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddScoped<IRepository<Material, int>, Repository<Material, int>>();
+            builder.Services.AddScoped<IRepository<Category, int>, Repository<Category, int>>();
 
             var app = builder.Build();
 
