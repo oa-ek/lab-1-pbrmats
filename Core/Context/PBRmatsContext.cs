@@ -1,17 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PBRmats.Core.Entities;
 using PBRmatsCore.Entities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PBRmatsCore.Context
 {
     public class PBRmatsContext : DbContext
     {
+        public PBRmatsContext(DbContextOptions<PBRmatsContext> options) : base(options)
+        {
+        }
+
         public DbSet<Material> Materials => Set<Material>();
         public DbSet<MaterialsCollection> MaterialsCollections => Set<MaterialsCollection>();
         public DbSet<Category> Categories => Set<Category>();
