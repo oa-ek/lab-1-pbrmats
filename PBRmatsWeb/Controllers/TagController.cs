@@ -4,18 +4,18 @@ using PBRmats.Repositories.Interfaces;
 
 namespace PBRmatsWeb.Controllers
 {
-    public class SourceController : Controller
+    public class TagController : Controller
     {
-        private readonly IRepository<Source, int> _sourceRepository;
+        private readonly IRepository<Tag, int> _tagRepository;
 
-        public SourceController(IRepository<Source, int> sourceRepository)
+        public TagController(IRepository<Tag, int> tagRepository)
         {
-            _sourceRepository = sourceRepository;
+            _tagRepository = tagRepository;
         }
 
         public IActionResult Index()
         {
-            return View(_sourceRepository.GetAll());
+            return View(_tagRepository.GetAll());
         }
 
         [HttpGet]
@@ -25,11 +25,11 @@ namespace PBRmatsWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Source source)
+        public IActionResult Create(Tag tag)
         {
             if (ModelState.IsValid)
             {
-                _sourceRepository.Create(source);
+                _tagRepository.Create(tag);
 
                 return RedirectToAction("Index");
             }
@@ -39,26 +39,26 @@ namespace PBRmatsWeb.Controllers
 
         public IActionResult Delete(int id)
         {
-            return View(_sourceRepository.Get(id));
+            return View(_tagRepository.Get(id));
         }
 
         [HttpPost]
-        public IActionResult Delete(Source source)
+        public IActionResult Delete(Tag tag)
         {
-            _sourceRepository.Delete(source);
+            _tagRepository.Delete(tag);
 
             return RedirectToAction("Index");
         }
 
         public IActionResult Edit(int id)
         {
-            return View(_sourceRepository.Get(id));
+            return View(_tagRepository.Get(id));
         }
 
         [HttpPost]
-        public IActionResult Edit(Source source)
+        public IActionResult Edit(Tag tag)
         {
-            _sourceRepository.Update(source);
+            _tagRepository.Update(tag);
 
             return RedirectToAction("Index");
         }

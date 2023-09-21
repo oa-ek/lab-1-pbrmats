@@ -14,7 +14,7 @@ namespace PBRmats.Core.Context
         public DbSet<MaterialsCollection> MaterialsCollections { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<License> Licenses { get; set; }
-        public DbSet<Source> Sources { get; set; }
+        public DbSet<Tag> Tags { get; set; }
         public DbSet<User> Users { get; set; }
         /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -34,9 +34,9 @@ namespace PBRmats.Core.Context
                 .WithMany();
 
             modelBuilder.Entity<Material>()
-                .HasMany(m => m.Sources)
+                .HasMany(m => m.Tags)
                 .WithMany()
-                .UsingEntity(j => j.ToTable("MaterialSources"));
+                .UsingEntity(j => j.ToTable("MaterialTags"));
 
             modelBuilder.Entity<User>()
                 .HasMany(u => u.MaterialsCollections)

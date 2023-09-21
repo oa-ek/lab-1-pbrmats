@@ -84,20 +84,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Study/C\#/lab-1-pbrmats/PBRmatsWeb/Views/Source/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU291cmNlXENyZWF0ZS5jc2h0bWw=
+[D:/Study/C\#/lab-1-pbrmats/PBRmatsWeb/Views/Tag/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFnXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Study/C\#/lab-1-pbrmats/PBRmatsWeb/Views/Source/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU291cmNlXERlbGV0ZS5jc2h0bWw=
+[D:/Study/C\#/lab-1-pbrmats/PBRmatsWeb/Views/Tag/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFnXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Study/C\#/lab-1-pbrmats/PBRmatsWeb/Views/Source/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU291cmNlXEVkaXQuY3NodG1s
+[D:/Study/C\#/lab-1-pbrmats/PBRmatsWeb/Views/Tag/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFnXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Study/C\#/lab-1-pbrmats/PBRmatsWeb/Views/Source/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU291cmNlXEluZGV4LmNzaHRtbA==
+[D:/Study/C\#/lab-1-pbrmats/PBRmatsWeb/Views/Tag/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFnXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Study/C\#/lab-1-pbrmats/PBRmatsWeb/Views/_ViewImports.cshtml]

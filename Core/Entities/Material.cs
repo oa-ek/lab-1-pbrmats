@@ -17,6 +17,6 @@ namespace PBRmats.Core.Entities
         [ForeignKey("License")]
         public int LicenseId { get; set; }
         public virtual License License { get; set; }
-        public virtual ICollection<Source> Sources { get; set; }
+        public virtual ICollection<Tag> Tags { get; set; }
     }
 }
