@@ -27,7 +27,7 @@ namespace PBRmats.Core.Context
             modelBuilder.Entity<Material>()
                 .HasOne(m => m.Category)
                 .WithMany()
-                /*.HasForeignKey(m => m.CategoryId)*/;
+                .HasForeignKey(m => m.CategoryId);
 
             modelBuilder.Entity<Material>()
                 .HasOne(m => m.License)
@@ -42,6 +42,10 @@ namespace PBRmats.Core.Context
                 .HasMany(u => u.MaterialsCollections)
                 .WithOne(mc => mc.ParentUser)
                 /*.HasForeignKey(mc => mc.UserId)*/;
+
+            modelBuilder.Entity<MaterialsCollection>()
+                .HasMany(m => m.Materials)
+                .WithMany();
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(PBRmatsContext).Assembly);
 

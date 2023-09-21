@@ -27,7 +27,9 @@ namespace PBRmatsWeb
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddScoped<IRepository<License, int>, Repository<License, int>>();
+            builder.Services.AddScoped<IListService<License>, LicenseService>();
             builder.Services.AddScoped<IRepository<Category, int>, Repository<Category, int>>();
+            builder.Services.AddScoped<IListService<Category>, CategoryService>();
             builder.Services.AddScoped<IRepository<Source, int>, Repository<Source, int>>();
             builder.Services.AddScoped<IRepository<Material, int>, Repository<Material, int>>();
 

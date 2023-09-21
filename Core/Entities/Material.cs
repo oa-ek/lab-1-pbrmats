@@ -9,7 +9,13 @@ namespace PBRmats.Core.Entities
         public string AvgColor { get; set; } = string.Empty;
         public DateTime ReleaseDate { get; set; }
 
+        [Display(Name = "Category")]
+        [ForeignKey("Category")]
+        public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
+        [Display(Name = "License")]
+        [ForeignKey("License")]
+        public int LicenseId { get; set; }
         public virtual License License { get; set; }
         public virtual ICollection<Source> Sources { get; set; }
     }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PBRmats.Core.Context;
 
@@ -11,9 +12,11 @@ using PBRmats.Core.Context;
 namespace PBRmats.Core.Migrations
 {
     [DbContext(typeof(PBRmatsContext))]
-    partial class PBRmatsContextModelSnapshot : ModelSnapshot
+    [Migration("20230920190239_CategoryFK")]
+    partial class CategoryFK
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +24,6 @@ namespace PBRmats.Core.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("MaterialMaterialsCollection", b =>
-                {
-                    b.Property<int>("MaterialsCollectionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MaterialsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("MaterialsCollectionId", "MaterialsId");
-
-                    b.HasIndex("MaterialsId");
-
-                    b.ToTable("MaterialMaterialsCollection");
-                });
 
             modelBuilder.Entity("MaterialSource", b =>
                 {
@@ -306,6 +294,9 @@ namespace PBRmats.Core.Migrations
                     b.Property<int>("LicenseId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("MaterialsCollectionId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("datetime2");
 
@@ -318,6 +309,8 @@ namespace PBRmats.Core.Migrations
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("LicenseId");
+
+                    b.HasIndex("MaterialsCollectionId");
 
                     b.ToTable("Materials");
                 });
@@ -380,21 +373,6 @@ namespace PBRmats.Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("MaterialMaterialsCollection", b =>
-                {
-                    b.HasOne("PBRmats.Core.Entities.MaterialsCollection", null)
-                        .WithMany()
-                        .HasForeignKey("MaterialsCollectionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PBRmats.Core.Entities.Material", null)
-                        .WithMany()
-                        .HasForeignKey("MaterialsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("MaterialSource", b =>
@@ -477,6 +455,10 @@ namespace PBRmats.Core.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("PBRmats.Core.Entities.MaterialsCollection", null)
+                        .WithMany("Materials")
+                        .HasForeignKey("MaterialsCollectionId");
+
                     b.Navigation("Category");
 
                     b.Navigation("License");
@@ -491,6 +473,11 @@ namespace PBRmats.Core.Migrations
                         .IsRequired();
 
                     b.Navigation("ParentUser");
+                });
+
+            modelBuilder.Entity("PBRmats.Core.Entities.MaterialsCollection", b =>
+                {
+                    b.Navigation("Materials");
                 });
 
             modelBuilder.Entity("PBRmats.Core.Entities.User", b =>

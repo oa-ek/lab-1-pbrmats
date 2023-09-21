@@ -15,20 +15,22 @@
 <table class ="table table-bordered text-light">
     <thead>
         <tr>
-            <th>Id</th>
             <th>Title</th>
             <th>AvgColor</th>
             <th>ReleaseDate</th>
+            <td>Category</td>
+            <td>License</td>
         </tr>
     </thead>
     <tbody>
         @foreach(var m in Model)
         {
             <tr>
-                <td>@m.Id</td>
                 <td>@m.Title</td>
                 <td>@m.AvgColor</td>
                 <td>@m.ReleaseDate</td>
+                <td>@m.Category.Title</td>
+                <td>@m.License.Title</td>
                 <td>
                     <a class="btn btn-outline-primary btn-sm" asp-action="Edit" asp-route-id="@m.Id">Edit</a>
                     <a class="btn btn-outline-danger btn-sm" asp-action="Delete" asp-route-id="@m.Id">Delete</a>

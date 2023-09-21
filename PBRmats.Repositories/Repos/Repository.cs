@@ -9,10 +9,8 @@ namespace PBRmats.Repositories.Repos
     {
         private PBRmatsContext _context;
 
-        public Repository(PBRmatsContext context)
-        {
+        public Repository(PBRmatsContext context) => 
             _context = context;
-        }
 
         public void Create(TEntity entity)
         {
