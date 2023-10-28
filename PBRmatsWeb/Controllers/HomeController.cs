@@ -26,26 +26,33 @@ namespace PBRmatsWeb.Controllers
             _licenseService = licenseService;
             _logger = logger;
         }
-
-        public IActionResult Index()
+        private IEnumerable<Material> GetFilteredMaterials(int? categoryId)
         {
-            GetData();
+            var materialsQuery = _materialRepository.GetAll();
 
-            var materials = _materialRepository.GetAll()
+            if (categoryId.HasValue)
+            {
+                materialsQuery = materialsQuery.Where(material => material.CategoryId == categoryId);
+            }
+
+            var categories = _categoryService.GetList();
+            var licenses = _licenseService.GetList();
+
+            return materialsQuery
                 .Select(material =>
                 {
-                    material.Category = _categoryService
-                                            .GetList()
-                                            .FirstOrDefault(c => c.Id == material.CategoryId);
-
-                    material.License = _licenseService
-                                            .GetList()
-                                            .FirstOrDefault(l => l.Id == material.LicenseId);
-
+                    material.Category = categories.FirstOrDefault(c => c.Id == material.CategoryId);
+                    material.License = licenses.FirstOrDefault(l => l.Id == material.LicenseId);
                     return material;
                 })
                 .ToList();
+        }
 
+
+        public IActionResult Index(int? categoryId)
+        {
+            GetData();
+            var materials = GetFilteredMaterials(categoryId);
             return View(materials);
         }
 

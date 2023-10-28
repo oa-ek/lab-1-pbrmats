@@ -3,7 +3,6 @@
 
 @{
     ViewData["Title"] = "Materials";
-    int counter = 0;
     var categories = ViewData["Categories"] as IEnumerable<Category>;
     var licenses = ViewData["Licenses"] as IEnumerable<License>;
 }
@@ -20,12 +19,12 @@
                 <div class="card-body overflow-auto">
                     @if (categories != null && categories.Any())
                     {
-                        <form id="categorySelectionForm">
+                        <form asp-controller="Home" asp-action="Index" id="categorySelectionForm">
                             @foreach (var category in categories)
                             {
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="categoryOption" id="category-@category.Id" value="@category.Id">
-                                    <label class="form-check-label" for="category-@category.Id">
+                                <div class="form-check p-0">
+                                    <input type="radio" name="categoryId" id="category-@category.Id" value="@category.Id" onchange="submitForm();">
+                                    <label class="btn text-light text-start w-100" for="category-@category.Id">
                                         @category.Title
                                     </label>
                                 </div>
@@ -43,36 +42,68 @@
         <!-- Right Column -->
         <div class="col p-2">
             <div class="card flex-row row flex-grow-1 m-0 p-2 element overflow-hidden flex-wrap">
-                @if (Model != null)
+                @if (Model != null && Model.Any())
                 {
-                    foreach (var m in Model)
-                    {
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center align-items-center mb-2" style="height: 326px;">
-                            @m.Title
-                        </div>
-                    }
+                    <div class="row">
+                        @foreach (var material in Model)
+                        {
+                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center align-items-center mb-2" style="height: 326px;">
+                                @material.Title
+                            </div>
+                        }
+                    </div>
                 }
                 else
                 {
-                    <div class="col-12">
-                        <p>No materials available.</p>
-                    </div>
+                    <p>No materials available.</p>
                 }
             </div>
         </div>
     </div>
 </div>
 
+
 <script>
-    let radios = document.querySelectorAll('input[type="radio"]');
-    for (let radio of radios) {
-        radio.addEventListener("click", function (e) {
-            if (e.target.getAttribute('data-checked') === '1') {
-                e.target.removeAttribute('data-checked');
-                e.target.checked = false;
-            } else {
-                e.target.setAttribute('data-checked', '1');
+    window.onload = function () {
+        const selectedCategoryId = localStorage.getItem('selectedCategoryId');
+        if (selectedCategoryId) {
+            const radio = document.getElementById(`category-${selectedCategoryId}`);
+            if (radio) {
+                radio.checked = true;
+                radio.nextElementSibling.classList.add('outline-button');
             }
-        });
+        }
+    };
+
+    document.getElementById("categorySelectionForm").addEventListener("click", function (e) {
+        if (e.target.tagName === "INPUT") {
+            const labels = document.querySelectorAll('.form-check label');
+            labels.forEach(label => label.classList.remove('outline-button'));
+
+            if (e.target.checked) {
+                // If the radio was previously selected, deselect it
+                if (localStorage.getItem('selectedCategoryId') === e.target.value) {
+                    localStorage.removeItem('selectedCategoryId');
+                    e.target.checked = false;
+                    window.location.href = "/Home/Index"; // Refresh without categoryId
+                } else {
+                    localStorage.setItem('selectedCategoryId', e.target.value);
+                    e.target.nextElementSibling.classList.add('outline-button');
+                }
+            } else {
+                localStorage.removeItem('selectedCategoryId');
+            }
+        }
+    });
+
+    function submitForm() {
+        const selectedCategoryId = localStorage.getItem('selectedCategoryId');
+        const form = document.getElementById('categorySelectionForm');
+        if (selectedCategoryId) {
+            form.action = `/Home/Index/${selectedCategoryId}`;
+        } else {
+            form.action = "/Home/Index";
+        }
+        form.submit();
     }
 </script>
