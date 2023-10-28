@@ -1,10 +1,78 @@
-﻿@{
+﻿@using PBRmats.Core.Entities
+@model IEnumerable<Material>
+
+@{
     ViewData["Title"] = "Materials";
+    int counter = 0;
+    var categories = ViewData["Categories"] as IEnumerable<Category>;
+    var licenses = ViewData["Licenses"] as IEnumerable<License>;
 }
 
-<div class="p-0 m-0 d-flex flex-column h-100">
-    <div class="m-0 p-0 pt-2 d-flex flex-row gap-2 pa-2 flex-grow-1 overflow-hidden">
-        <div class="flex-shrink-0 flex-grow-0 d-flex flex-column">
+<div class="container-fluid h-100">
+    <div class="row flex-grow-1">
+
+        <!-- Left Column -->
+        <div class="col-md-3 p-2" style="flex: 0 0 250px; max-width: 250px;">
+            <div class="card element h-100">
+                <div class="card-header ">
+                    Categories
+                </div>
+                <div class="card-body overflow-auto">
+                    @if (categories != null && categories.Any())
+                    {
+                        <form id="categorySelectionForm">
+                            @foreach (var category in categories)
+                            {
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="categoryOption" id="category-@category.Id" value="@category.Id">
+                                    <label class="form-check-label" for="category-@category.Id">
+                                        @category.Title
+                                    </label>
+                                </div>
+                            }
+                        </form>
+                    }
+                    else
+                    {
+                        <p>No categories available.</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="col p-2">
+            <div class="card flex-row row flex-grow-1 m-0 p-2 element overflow-hidden flex-wrap">
+                @if (Model != null)
+                {
+                    foreach (var m in Model)
+                    {
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center align-items-center mb-2" style="height: 326px;">
+                            @m.Title
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="col-12">
+                        <p>No materials available.</p>
+                    </div>
+                }
+            </div>
         </div>
     </div>
 </div>
+
+<script>
+    let radios = document.querySelectorAll('input[type="radio"]');
+    for (let radio of radios) {
+        radio.addEventListener("click", function (e) {
+            if (e.target.getAttribute('data-checked') === '1') {
+                e.target.removeAttribute('data-checked');
+                e.target.checked = false;
+            } else {
+                e.target.setAttribute('data-checked', '1');
+            }
+        });
+    }
+</script>

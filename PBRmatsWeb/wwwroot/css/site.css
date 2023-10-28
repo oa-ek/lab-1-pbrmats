@@ -27,7 +27,24 @@ body {
     background-color: #27282b;
 }
 
+.page-container {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 .form-floating > .form-control {
     color: #fff;
     background-color: #27282b;
+}
+
+.material-box {
+    height: 326px;
+    width: 276px;
+}
+
+@media (max-width: 576px) {
+    .material-box {
+        height: 160px;
+        width: 140px;
+    }
 }
