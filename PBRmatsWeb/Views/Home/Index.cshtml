@@ -85,7 +85,7 @@
                 if (localStorage.getItem('selectedCategoryId') === e.target.value) {
                     localStorage.removeItem('selectedCategoryId');
                     e.target.checked = false;
-                    window.location.href = "/Home/Index"; // Refresh without categoryId
+                    window.location.href = "/"; // Refresh without categoryId
                 } else {
                     localStorage.setItem('selectedCategoryId', e.target.value);
                     e.target.nextElementSibling.classList.add('outline-button');
@@ -102,7 +102,7 @@
         if (selectedCategoryId) {
             form.action = `/Home/Index/${selectedCategoryId}`;
         } else {
-            form.action = "/Home/Index";
+            form.action = "/Home";
         }
         form.submit();
     }
