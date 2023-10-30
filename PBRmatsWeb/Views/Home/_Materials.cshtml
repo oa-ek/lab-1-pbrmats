@@ -1,19 +1,35 @@
 ﻿@using PBRmats.Core.Entities
 
-@model List<Material>
+@model IEnumerable<Material>
 
-@if (Model != null && Model.Any())
-{
-    <div class="row">
-        @foreach (var material in Model)
-        {
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center align-items-center mb-2" style="height: 326px;">
-                @material.Title
-            </div>
-        }
-    </div>
-}
-else
-{
-    <p>No materials available.</p>
-}
+<div class="card flex-row row flex-grow-1 m-0 p-2 element overflow-hidden flex-wrap">
+    <form asp-controller="Home" asp-action="Index" id="sortByForm">
+        <label for="sortBy">Sort by:</label>
+        <select name="sortBy" id="sortBy" onchange="submitSortByForm();">
+            <option value="">Select Sort Order</option>
+            <option value="dateAsc">Date (Oldest First)</option>
+            <option value="dateDesc">Date (Newest First)</option>
+            <option value="titleAsc">Title (A-Z)</option>
+            <option value="titleDesc">Title (Z-A)</option>
+        </select>
+    </form>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="row">
+            @foreach (var material in Model)
+            {
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center align-items-center mb-2">
+                    <div class="card material-card">
+                        <img src="@material.ImageUrl" alt="@material.Title" class="card-img-top" style="height: 200px; object-fit: cover;">
+                        <p class="card-text text-center mt-auto">@material.Title</p>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p>No materials available.</p>
+    }
+</div>

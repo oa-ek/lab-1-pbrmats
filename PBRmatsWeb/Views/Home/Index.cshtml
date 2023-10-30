@@ -19,17 +19,12 @@
                 <div class="card-body overflow-auto">
                     @if (categories != null && categories.Any())
                     {
-                        <form asp-controller="Home" asp-action="Index" id="categorySelectionForm">
+                        <div id="categoryButtons">
                             @foreach (var category in categories)
                             {
-                                <div class="form-check p-0">
-                                    <input type="radio" name="categoryId" id="category-@category.Id" value="@category.Id" onchange="submitForm();">
-                                    <label class="btn text-light text-start w-100" for="category-@category.Id">
-                                        @category.Title
-                                    </label>
-                                </div>
+                                <button type="button" class="category-btn" data-id="@category.Id">@category.Title</button>
                             }
-                        </form>
+                        </div>
                     }
                     else
                     {
@@ -41,23 +36,9 @@
 
         <!-- Right Column -->
         <div class="col p-2">
-            <div class="card flex-row row flex-grow-1 m-0 p-2 element overflow-hidden flex-wrap">
-                @if (Model != null && Model.Any())
-                {
-                    <div class="row">
-                        @foreach (var material in Model)
-                        {
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center align-items-center mb-2" style="height: 326px;">
-                                @material.Title
-                            </div>
-                        }
-                    </div>
-                }
-                else
-                {
-                    <p>No materials available.</p>
-                }
-            </div>
+            @{
+                Html.RenderPartial("_Materials", Model);
+            }
         </div>
     </div>
 </div>
@@ -66,44 +47,58 @@
 <script>
     window.onload = function () {
         const selectedCategoryId = localStorage.getItem('selectedCategoryId');
+        const sortBy = localStorage.getItem('sortBy');
+
+        if (sortBy) {
+            const select = document.getElementById('sortBy');
+            select.value = sortBy;
+        }
+
         if (selectedCategoryId) {
-            const radio = document.getElementById(`category-${selectedCategoryId}`);
-            if (radio) {
-                radio.checked = true;
-                radio.nextElementSibling.classList.add('outline-button');
+            const button = document.querySelector(`.category-btn[data-id="${selectedCategoryId}"]`);
+            if (button) {
+                button.classList.add('selected');
             }
         }
     };
 
-    document.getElementById("categorySelectionForm").addEventListener("click", function (e) {
-        if (e.target.tagName === "INPUT") {
-            const labels = document.querySelectorAll('.form-check label');
-            labels.forEach(label => label.classList.remove('outline-button'));
-
-            if (e.target.checked) {
-                // If the radio was previously selected, deselect it
-                if (localStorage.getItem('selectedCategoryId') === e.target.value) {
-                    localStorage.removeItem('selectedCategoryId');
-                    e.target.checked = false;
-                    window.location.href = "/"; // Refresh without categoryId
-                } else {
-                    localStorage.setItem('selectedCategoryId', e.target.value);
-                    e.target.nextElementSibling.classList.add('outline-button');
-                }
-            } else {
-                localStorage.removeItem('selectedCategoryId');
+    document.querySelectorAll(".category-btn").forEach(button => {
+        button.addEventListener("click", function (e) {
+            const prevSelected = document.querySelector('.category-btn.selected');
+            if (prevSelected) {
+                prevSelected.classList.remove('selected');
             }
-        }
+
+            if (prevSelected === e.target) {
+                localStorage.removeItem('selectedCategoryId');
+                window.location.href = "/";
+            } else {
+                e.target.classList.add('selected');
+                localStorage.setItem('selectedCategoryId', e.target.getAttribute('data-id'));
+                submitCategoryForm();
+            }
+        });
     });
 
-    function submitForm() {
+    document.getElementById("sortBy").addEventListener("change", function (e) {
+        localStorage.setItem('sortBy', e.target.value);
+        submitSortByForm();
+    });
+
+    function submitCategoryForm() {
+        const sortBy = localStorage.getItem('sortBy') || ''; // Use the saved value or default to an empty string
         const selectedCategoryId = localStorage.getItem('selectedCategoryId');
-        const form = document.getElementById('categorySelectionForm');
+
         if (selectedCategoryId) {
-            form.action = `/Home/Index/${selectedCategoryId}`;
+            window.location.href = `/Home/Index?categoryId=${selectedCategoryId}&sortBy=${sortBy}`;
         } else {
-            form.action = "/Home";
+            window.location.href = `/Home/Index?sortBy=${sortBy}`;
         }
-        form.submit();
+    }
+
+    function submitSortByForm() {
+        const selectedCategoryId = localStorage.getItem('selectedCategoryId') || '';
+        const sortByValue = document.getElementById("sortBy").value;
+        window.location.href = `/Home/Index?categoryId=${selectedCategoryId}&sortBy=${sortByValue}`;
     }
 </script>

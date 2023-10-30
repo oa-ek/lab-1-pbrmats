@@ -6,6 +6,7 @@ using PBRmats.Repositories.Interfaces;
 using PBRmats.Repositories.Repos;
 using PBRmatsWeb.Models;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace PBRmatsWeb.Controllers
 {
@@ -26,7 +27,7 @@ namespace PBRmatsWeb.Controllers
             _licenseService = licenseService;
             _logger = logger;
         }
-        private IEnumerable<Material> GetFilteredMaterials(int? categoryId)
+        private IEnumerable<Material> GetFilteredMaterials(int? categoryId, string sortBy)
         {
             var materialsQuery = _materialRepository.GetAll();
 
@@ -38,21 +39,41 @@ namespace PBRmatsWeb.Controllers
             var categories = _categoryService.GetList();
             var licenses = _licenseService.GetList();
 
-            return materialsQuery
-                .Select(material =>
-                {
-                    material.Category = categories.FirstOrDefault(c => c.Id == material.CategoryId);
-                    material.License = licenses.FirstOrDefault(l => l.Id == material.LicenseId);
-                    return material;
-                })
-                .ToList();
+            materialsQuery = materialsQuery
+                             .Select(material =>
+                             {
+                                 material.Category = categories.FirstOrDefault(c => c.Id == material.CategoryId);
+                                 material.License = licenses.FirstOrDefault(l => l.Id == material.LicenseId);
+                                 return material;
+                             })
+                             .ToList();
+
+            switch (sortBy)
+            {
+                case "dateAsc":
+                    materialsQuery = materialsQuery.OrderBy(material => material.ReleaseDate);
+                    break;
+                case "dateDesc":
+                    materialsQuery = materialsQuery.OrderByDescending(material => material.ReleaseDate);
+                    break;
+                case "titleAsc":
+                    materialsQuery = materialsQuery.OrderBy(material => material.Title);
+                    break;
+                case "titleDesc":
+                    materialsQuery = materialsQuery.OrderByDescending(material => material.Title);
+                    break;
+
+                default:
+                    return materialsQuery = materialsQuery.OrderByDescending(material => material.ReleaseDate);
+            }
+
+            return materialsQuery;
         }
 
-
-        public IActionResult Index(int? categoryId)
+        public IActionResult Index(int? categoryId, string sortBy = "")
         {
             GetData();
-            var materials = GetFilteredMaterials(categoryId);
+            var materials = GetFilteredMaterials(categoryId, sortBy);
             return View(materials);
         }
 
