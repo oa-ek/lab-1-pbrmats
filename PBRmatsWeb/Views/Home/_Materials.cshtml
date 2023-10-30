@@ -2,16 +2,32 @@
 
 @model IEnumerable<Material>
 
+@{
+    var licenses = ViewData["Licenses"] as IEnumerable<License>;
+}
+
 <div class="card flex-row row flex-grow-1 m-0 p-2 element overflow-hidden flex-wrap">
-    <form asp-controller="Home" asp-action="Index" id="sortByForm">
-        <label for="sortBy">Sort by:</label>
-        <select name="sortBy" id="sortBy" onchange="submitSortByForm();">
-            <option value="">Select Sort Order</option>
-            <option value="dateAsc">Date (Oldest First)</option>
-            <option value="dateDesc">Date (Newest First)</option>
-            <option value="titleAsc">Title (A-Z)</option>
-            <option value="titleDesc">Title (Z-A)</option>
-        </select>
+    <form asp-controller="Home" asp-action="Index" id="filterForm" class="mb-3">
+        <div class="d-flex justify-content-start align-items-center gap-2">
+            <div class="mr-3">
+                <label for="sortBy">Sorting by:</label>
+                <select name="sortBy" id="sortBy">
+                    <option value="">Date (Newest First)</option>
+                    <option value="dateAsc">Date (Oldest First)</option>
+                    <option value="titleAsc">Title (A-Z)</option>
+                    <option value="titleDesc">Title (Z-A)</option>
+                </select>
+            </div>
+            <div>
+                <select name="licenseSort" id="licenseSort">
+                    <option value="">All Licenses</option>
+                    @foreach (var license in licenses)
+                    {
+                        <option value="@license.Id">@license.Title</option>
+                    }
+                </select>
+            </div>
+        </div>
     </form>
 
     @if (Model != null && Model.Any())
