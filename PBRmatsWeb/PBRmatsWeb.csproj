@@ -24,4 +24,8 @@
     <ProjectReference Include="..\PBRmats.Repositories\PBRmats.Repositories.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Uploads\Material\" />
+  </ItemGroup>
+
 </Project>

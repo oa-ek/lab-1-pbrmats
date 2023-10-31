@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "6Z3YJx51uL3bCA9ht3f/d5/5O6AFy59MBi5XMXPfres=",
+  "Hash": "R3bwQQjhVe8RadtFM4D5D39Ud2fkn7aYKOCzRPta8QU=",
   "Source": "PBRmatsWeb",
   "BasePath": "_content/PBRmatsWeb",
   "Mode": "Default",
@@ -2089,6 +2089,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\wwwroot\\Uploads\\defaultMaterial.webp",
+      "SourceId": "PBRmatsWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\wwwroot\\",
+      "BasePath": "_content/PBRmatsWeb",
+      "RelativePath": "Uploads/defaultMaterial.webp",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\defaultMaterial.webp"
     }
   ]
 }

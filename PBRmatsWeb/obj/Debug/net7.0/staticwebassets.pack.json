@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\PBRmatsWeb.bundle.scp.css"
     },
     {
+      "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\wwwroot\\Uploads\\defaultMaterial.webp",
+      "PackagePath": "staticwebassets\\Uploads\\defaultMaterial.webp"
+    },
+    {
       "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

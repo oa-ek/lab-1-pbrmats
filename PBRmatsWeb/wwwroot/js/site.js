@@ -65,6 +65,21 @@ function redirectToPage() {
     window.location.href = url;
 }
 
+function previewImage() {
+    var file = document.getElementById("MaterialImage").files[0];
+    var reader = new FileReader();
+
+    reader.onloadend = function () {
+        document.getElementById("preview").style.display = "block";
+        document.getElementById("preview").src = reader.result;
+    }
+
+    if (file) {
+        reader.readAsDataURL(file);
+    }
+}
+
+
 /*
 <script>
     window.onload = function () {
