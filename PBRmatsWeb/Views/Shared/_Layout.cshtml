@@ -4,12 +4,14 @@
 
 @{
     var isAdmin = false;
+    var isUser = false;
     if (SignInManager.IsSignedIn(User))
     {
         var user = await UserManager.GetUserAsync(User);
         if (user != null)
         {
             isAdmin = await UserManager.IsInRoleAsync(user, "Admin");
+            isUser = await UserManager.IsInRoleAsync(user, "User");
         }
     }
 }

@@ -45,6 +45,9 @@ namespace PBRmatsWeb
             var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             CreateRoles(roleManager).Wait();
 
+            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+            AssignUserRoleToAllUsers(userManager, roleManager).Wait();
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -72,6 +75,7 @@ namespace PBRmatsWeb
 
             app.Run();
         }
+
         private static async Task CreateRoles(RoleManager<IdentityRole> roleManager)
         {
             if (!await roleManager.RoleExistsAsync("Admin"))
@@ -82,6 +86,22 @@ namespace PBRmatsWeb
             if (!await roleManager.RoleExistsAsync("User"))
             {
                 await roleManager.CreateAsync(new IdentityRole("User"));
+            }
+        }
+
+        private static async Task AssignUserRoleToAllUsers(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        {
+            if (await roleManager.RoleExistsAsync("User"))
+            {
+                var allUsers = await userManager.Users.ToListAsync();
+
+                foreach (var user in allUsers)
+                {
+                    if (!await userManager.IsInRoleAsync(user, "User"))
+                    {
+                        await userManager.AddToRoleAsync(user, "User");
+                    }
+                }
             }
         }
     }
