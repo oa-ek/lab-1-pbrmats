@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PBRmats.Core.Entities;
 using PBRmats.Repositories.Interfaces;
 
 namespace PBRmatsWeb.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class TagController : Controller
     {
         private readonly IRepository<Tag, int> _tagRepository;

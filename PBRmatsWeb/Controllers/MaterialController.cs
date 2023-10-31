@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PBRmats.Core.Entities;
 using PBRmats.Repositories.Interfaces;
 
 namespace PBRmatsWeb.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class MaterialController : Controller
     {
         private readonly IRepository<Material, int> _materialRepository;
@@ -162,6 +164,7 @@ namespace PBRmatsWeb.Controllers
         {
             return _environment.WebRootPath + "\\Uploads\\Material\\" + ProductCode;
         }
+
         [NonAction]
         private string GetImageByMaterial(string materialCode)
         {
@@ -177,8 +180,8 @@ namespace PBRmatsWeb.Controllers
             {
                 imageUrl = Path.Combine(hostUrl, "uploads", "Material", materialCode, "image.png");
             }
-            return imageUrl;
 
+            return imageUrl;
         }
 
         private void PopulateDropdowns()

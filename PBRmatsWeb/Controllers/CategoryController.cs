@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using PBRmats.Core.Entities;
 using PBRmats.Repositories.Interfaces;
 
 namespace PBRmatsWeb.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CategoryController : Controller
     {
         private readonly IRepository<Category, int> _categoryRepository;

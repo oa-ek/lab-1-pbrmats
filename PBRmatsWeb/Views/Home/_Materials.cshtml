@@ -23,9 +23,11 @@
     <div class="card element">
         <form asp-controller="Home" asp-action="Index" id="filterForm" class="mb-3">
             <input type="hidden" name="searchTerm" id="hiddenSearchTerm" value="">
-            <div class="d-flex justify-content-start align-items-center gap-2">
-                <div class="mr-3">
-                    <label for="sortBy">Sorting by:</label>
+            <div class="d-flex flex-column flex-md-row justify-content-start align-items-center gap-2">
+                <div>
+                    <p class="m-0 text-nowrap" for="sortBy">Sorting by:</p>
+                </div>
+                <div>
                     <select name="sortBy" id="sortBy">
                         <option value="">Date (Newest First)</option>
                         <option value="dateAsc">Date (Oldest First)</option>
@@ -52,7 +54,7 @@
                 {
                     <div class="col-xl-2-4 col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center align-items-center mb-2">
                         <div class="card material-card">
-                            <img src="@material.ImageUrl" alt="@material.Title" class="card-img-top absolute z-1 top-0 col d-flex flex-column fill-height justify-center align-center">
+                            <img src="@material.ImageUrl" alt="@material.Title" class="card-img-top material-img absolute z-1 top-0 col d-flex flex-column fill-height justify-center align-center">
                             <p class="card-text text-center">@material.Title</p>
                         </div>
                     </div>

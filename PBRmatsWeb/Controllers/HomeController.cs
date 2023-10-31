@@ -45,13 +45,13 @@ namespace PBRmatsWeb.Controllers
             var licenses = _licenseService.GetList();
 
             materialsQuery = materialsQuery
-                             .Select(material =>
-                             {
-                                 material.Category = categories.FirstOrDefault(c => c.Id == material.CategoryId);
-                                 material.License = licenses.FirstOrDefault(l => l.Id == material.LicenseId);
-                                 return material;
-                             })
-                             .ToList();
+            .Select(material =>
+            {
+                material.Category = categories.FirstOrDefault(c => c.Id == material.CategoryId);
+                material.License = licenses.FirstOrDefault(l => l.Id == material.LicenseId);
+                return material;
+            })
+            .ToList();
 
             switch (sortBy)
             {
