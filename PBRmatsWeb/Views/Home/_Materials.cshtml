@@ -6,46 +6,62 @@
     var licenses = ViewData["Licenses"] as IEnumerable<License>;
 }
 
-<div class="card flex-row row flex-grow-1 m-0 p-2 element overflow-hidden flex-wrap">
-    <form asp-controller="Home" asp-action="Index" id="filterForm" class="mb-3">
-        <div class="d-flex justify-content-start align-items-center gap-2">
-            <div class="mr-3">
-                <label for="sortBy">Sorting by:</label>
-                <select name="sortBy" id="sortBy">
-                    <option value="">Date (Newest First)</option>
-                    <option value="dateAsc">Date (Oldest First)</option>
-                    <option value="titleAsc">Title (A-Z)</option>
-                    <option value="titleDesc">Title (Z-A)</option>
-                </select>
-            </div>
-            <div>
-                <select name="licenseSort" id="licenseSort">
-                    <option value="">All Licenses</option>
-                    @foreach (var license in licenses)
-                    {
-                        <option value="@license.Id">@license.Title</option>
-                    }
-                </select>
-            </div>
-        </div>
-    </form>
-
-    @if (Model != null && Model.Any())
-    {
-        <div class="row">
-            @foreach (var material in Model)
-            {
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center align-items-center mb-2">
-                    <div class="card material-card">
-                        <img src="@material.ImageUrl" alt="@material.Title" class="card-img-top absolute z-1 top-0 col d-flex flex-column fill-height justify-center align-center">
-                        <p class="card-text text-center">@material.Title</p>
-                    </div>
+<div class="flex-column row flex-grow-1 m-0 overflow-hidden flex-wrap gap-2">
+    <div class="card element">
+        <form method="get" action="/Home/Index">
+            <div class="input-group my-3">
+                <input type="text" autocomplete="off" class="form-control" placeholder="Search by title or tag" name="searchTerm">
+                <!-- Hidden inputs for other filters -->
+                <input type="hidden" name="sortBy" id="searchSortBy" />
+                <input type="hidden" name="licenseSort" id="searchLicenseSort" />
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit">Search</button>
                 </div>
-            }
-        </div>
-    }
-    else
-    {
-        <p>No materials available.</p>
-    }
+            </div>
+        </form>
+    </div>
+    <div class="card element">
+        <form asp-controller="Home" asp-action="Index" id="filterForm" class="mb-3">
+            <input type="hidden" name="searchTerm" id="hiddenSearchTerm" value="">
+            <div class="d-flex justify-content-start align-items-center gap-2">
+                <div class="mr-3">
+                    <label for="sortBy">Sorting by:</label>
+                    <select name="sortBy" id="sortBy">
+                        <option value="">Date (Newest First)</option>
+                        <option value="dateAsc">Date (Oldest First)</option>
+                        <option value="titleAsc">Title (A-Z)</option>
+                        <option value="titleDesc">Title (Z-A)</option>
+                    </select>
+                </div>
+                <div>
+                    <select name="licenseSort" id="licenseSort">
+                        <option value="">All Licenses</option>
+                        @foreach (var license in licenses)
+                        {
+                            <option value="@license.Id">@license.Title</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </form>
+
+        @if (Model != null && Model.Any())
+        {
+            <div class="row">
+                @foreach (var material in Model)
+                {
+                    <div class="col-xl-2-4 col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center align-items-center mb-2">
+                        <div class="card material-card">
+                            <img src="@material.ImageUrl" alt="@material.Title" class="card-img-top absolute z-1 top-0 col d-flex flex-column fill-height justify-center align-center">
+                            <p class="card-text text-center">@material.Title</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <p>No materials available.</p>
+        }
+    </div>
 </div>

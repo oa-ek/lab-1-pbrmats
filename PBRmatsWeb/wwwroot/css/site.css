@@ -32,9 +32,43 @@ body {
     padding-right: 10px;
 }
 
-.form-floating > .form-control {
+.form-control {
     color: #fff;
     background-color: #27282b;
+    border: 1px solid #525252;
+}
+
+.form-control:focus {
+    color: #fff;
+    background-color: #27282b;
+    border: 1px solid #525252;
+}
+
+.form-control:valid {
+    color: #fff;
+    background-color: #27282b;
+    border: 1px solid #525252;
+}
+
+.form-control:-webkit-autofill,
+.form-control:-webkit-autofill:hover,
+.form-control:-webkit-autofill:focus {
+    color: #fff;
+    background-color: #27282b;
+    border: 1px solid #525252;
+}
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: #fff !important;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 50px #27282b inset;
+    transition: background-color 5000s ease-in-out 0s;
+    background-color: #27282b;
+    border: 1px solid #525252;
 }
 
 .category-btn {
@@ -129,4 +163,11 @@ select::after {
 
 select::-moz-list-drop {
     border-radius: 0px;
+}
+
+@media (min-width: 1200px) {
+    .col-xl-2-4 {
+        flex: 0 0 20%;
+        max-width: 20%;
+    }
 }

@@ -24,9 +24,16 @@ namespace PBRmatsWeb.Controllers
             _licenseService = licenseService;
             _logger = logger;
         }
-        private IEnumerable<Material> GetFilteredMaterials(string sortBy, int? categoryId = null, int? licenseSort = null)
+
+        private IEnumerable<Material> GetFilteredMaterials(string searchTerm = "", string sortBy = "", 
+                                                            int? categoryId = null, int? licenseSort = null)
         {
             var materialsQuery = _materialRepository.GetAll();
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                materialsQuery = materialsQuery.Where(m => m.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase));
+            }
 
             if (categoryId.HasValue)
                 materialsQuery = materialsQuery.Where(material => material.CategoryId == categoryId);
@@ -61,13 +68,15 @@ namespace PBRmatsWeb.Controllers
                     return materialsQuery = materialsQuery.OrderByDescending(material => material.ReleaseDate);
             }
 
+
             return materialsQuery;
         }
 
-        public IActionResult Index(string sortBy = "", int? categoryId = null, int? licenseSort = null)
+        public IActionResult Index(string searchTerm = "", string sortBy = "", 
+                                    int? categoryId = null, int? licenseSort = null)
         {
             GetData();
-            var materials = GetFilteredMaterials(sortBy, categoryId, licenseSort);
+            var materials = GetFilteredMaterials(searchTerm, sortBy, categoryId, licenseSort);
 
             return View(materials);
         }

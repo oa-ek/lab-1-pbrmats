@@ -1,11 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using PBRmats.Core.Entities;
 using PBRmats.Repositories.Interfaces;
-using Microsoft.AspNetCore.Http;
-using System.IO;
-using Microsoft.AspNetCore.Hosting;
 
 namespace PBRmatsWeb.Controllers
 {
@@ -56,17 +52,6 @@ namespace PBRmatsWeb.Controllers
 
             return View();
         }
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Create(Material material)
-        //{
-        //    _materialRepository.Create(material);
-
-        //    PopulateDropdowns();
-
-        //    return RedirectToAction("Index");
-        //}
 
         [HttpPost]
         [ValidateAntiForgeryToken]
