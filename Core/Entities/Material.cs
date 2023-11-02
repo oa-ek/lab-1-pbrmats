@@ -7,6 +7,9 @@ namespace PBRmats.Core.Entities
     {
         public string Title { get; set; } = string.Empty;
         public string AvgColor { get; set; } = string.Empty;
+        public string AvgSpecularColor { get; set; } = string.Empty;
+        public float AvgMetallic { get; set; }
+        public float AvgIOR { get; set; }
         public DateTime ReleaseDate { get; set; }
 
         [Display(Name = "Category")]
