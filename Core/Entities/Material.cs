@@ -19,6 +19,6 @@ namespace PBRmats.Core.Entities
         public virtual License License { get; set; }
         [Required]
         public string ImageUrl { get; set; }
-        public virtual ICollection<Tag> Tags { get; set; }
+        public ICollection<MaterialTag> MaterialTags { get; set; }
     }
 }

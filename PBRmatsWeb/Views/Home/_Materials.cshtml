@@ -10,7 +10,7 @@
     <div class="card element">
         <form method="get" action="/Home/Index">
             <div class="input-group my-3">
-                <input type="text" autocomplete="off" class="form-control" placeholder="Search by title or tag" name="searchTerm">
+                <input type="text" autocomplete="off" class="form-control" placeholder="Search by title" name="searchTerm">
                 <!-- Hidden inputs for other filters -->
                 <input type="hidden" name="sortBy" id="searchSortBy" />
                 <input type="hidden" name="licenseSort" id="searchLicenseSort" />
@@ -53,7 +53,16 @@
                 @foreach (var material in Model)
                 {
                     <div class="col-xl-2-4 col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center align-items-center mb-2">
-                        <div class="card material-card">
+                        <div class="card material-card"
+                             data-toggle="modal"
+                             data-target="#materialDetailModal"
+                             data-material-id="@material.Id"
+                             data-material-title="@material.Title"
+                             data-material-image="@material.ImageUrl"
+                             data-material-color="@material.AvgColor"
+                             data-material-date="@material.ReleaseDate"
+                             data-material-category="@material.Category.Title"
+                             data-material-license="@material.License.Title">
                             <img src="@material.ImageUrl" alt="@material.Title" class="card-img-top material-img absolute z-1 top-0 col d-flex flex-column fill-height justify-center align-center">
                             <p class="card-text text-center">@material.Title</p>
                         </div>
@@ -66,4 +75,59 @@
             <p>No materials available.</p>
         }
     </div>
+
+    <div class="modal fade" id="materialDetailModal" tabindex="-1" role="dialog" aria-labelledby="materialDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content element">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalMaterialTitle"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3 id="modalMaterialTitle"></h3>
+                            <div class="d-flex align-items-center mb-2">
+                                <span class="ml-2" id="modalMaterialColor"></span>
+                                <div id="modalMaterialColorDisplay" style="width: 25px; height: 25px; border: 1px solid #000;"></div>
+                            </div>
+                            <p id="modalMaterialCategory"></p>
+                            <p id="modalMaterialLicense"></p>
+                            <p id="modalMaterialDate"></p>
+                        </div>
+                        <div class="col-md-6">
+                            <img id="modalMaterialImage" src="" alt="Material Image" class="img-item img-fluid mb-3">
+                        </div>
+                    </div>
+                    <!-- Add other material details as needed -->
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).on('click', '.material-card', function () {
+        var materialTitle = $(this).data('material-title');
+        var materialImage = $(this).data('material-image');
+        var materialColor = $(this).data('material-color');
+        var materialCategory = $(this).data('material-category');
+        var materialLicense = $(this).data('material-license');
+        var materialDate = $(this).data('material-date');
+
+        $('#modalMaterialTitle').text(materialTitle);
+        $('#modalMaterialImage').attr('src', materialImage);
+        $('#modalMaterialColor').text('Avarage Color: ' + materialColor);
+        $('#modalMaterialColorDisplay').css('background-color', materialColor);
+        $('#modalMaterialCategory').text('Category: ' + materialCategory);
+        $('#modalMaterialLicense').text('License: ' + materialLicense);
+        $('#modalMaterialDate').text('Release Date: ' + materialDate);
+    });
+</script>

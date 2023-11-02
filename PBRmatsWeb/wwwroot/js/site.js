@@ -100,3 +100,10 @@ function previewImage() {
     };
     reader.readAsDataURL(file);
 }
+
+var input = document.querySelector('input[name=MaterialTags]');
+
+var tagify = new Tagify(input);
+tagify.on('change', function (e) {
+    console.log('Tagify value changed:', e.detail.value);
+});

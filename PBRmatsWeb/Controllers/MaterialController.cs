@@ -3,48 +3,63 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PBRmats.Core.Entities;
 using PBRmats.Repositories.Interfaces;
+using Newtonsoft.Json;
+using PBRmats.Core.Context;
+using Microsoft.EntityFrameworkCore;
+using Humanizer;
+using Microsoft.AspNetCore.Http.HttpResults;
+using PBRmats.Core.Migrations;
+using System.IO;
 
 namespace PBRmatsWeb.Controllers
 {
+    file class TagDTO
+    {
+        public string Value { get; set; }
+    }
+
     [Authorize(Roles = "Admin")]
     public class MaterialController : Controller
     {
+        private const string DefaultImage = "/uploads/defaultMaterial.webp";
+        private const string UploadsFolder = "uploads";
+        private const string MaterialFolder = "Material";
+        private const string DefaultHostUrl = "https://localhost:7072/";
+
         private readonly IRepository<Material, int> _materialRepository;
+        private readonly IRepository<Tag, int> _tagRepository;
         private readonly IListService<Category> _categoryService;
         private readonly IListService<License> _licenseService;
         private readonly IWebHostEnvironment _environment;
 
-        public MaterialController(IRepository<Material, int> materialRepository, 
+        private PBRmatsContext _context;
+
+        public MaterialController(PBRmatsContext context, IRepository<Material, int> materialRepository,
+                                    IRepository<Tag, int> tagRepository,
                                     IListService<Category> categoryService,
                                     IListService<License> licenseService,
                                     IWebHostEnvironment environment)
         {
             _materialRepository = materialRepository;
+            _tagRepository = tagRepository;
             _categoryService = categoryService;
             _licenseService = licenseService;
             _environment = environment;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            var materials = _materialRepository.GetAll()
-                .Select(material =>
-                {
-                    material.Category = _categoryService
-                                            .GetList()
-                                            .FirstOrDefault(c => c.Id == material.CategoryId);
+            var materials = _materialRepository.GetAll();
 
-                    material.License = _licenseService
-                                            .GetList()
-                                            .FirstOrDefault(l => l.Id == material.LicenseId);
+            var updatedMaterials = materials.Select(material =>
+            {
+                material.ImageUrl = GetImageByMaterial(material.Id.ToString());
 
-                    material.ImageUrl = GetImageByMaterial(material.Id.ToString());
+                return material;
+            });
 
-                    return material;
-                })
-                .ToList();
-
-            return View(materials);
+            return View(updatedMaterials);
         }
 
         [HttpGet]
@@ -57,10 +72,14 @@ namespace PBRmatsWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Material material, IFormFile MaterialImage)
+        public async Task<IActionResult> Create(Material material, IFormFile MaterialImage, string MaterialTags)
         {
             material.ImageUrl = await SaveMaterialImageAsync(MaterialImage);
+
+            ParseAndAddTags(material, MaterialTags);
+
             _materialRepository.Create(material);
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -68,16 +87,55 @@ namespace PBRmatsWeb.Controllers
         {
             PopulateDropdowns();
 
-            return View(_materialRepository.Get(id));
+            var material = _materialRepository.Get(id);
+
+            if (material == null)
+                return NotFound();
+
+            return View(material);
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Material material, IFormFile MaterialImage)
+        public async Task<IActionResult> Edit(Material material, IFormFile MaterialImage, string MaterialTags)
         {
             material.ImageUrl = await SaveMaterialImageAsync(MaterialImage, material.ImageUrl);
+
+            ParseAndAddTags(material, MaterialTags);
+
             _materialRepository.Update(material);
+
             return RedirectToAction(nameof(Index));
+        }
+
+        private void ParseAndAddTags(Material material, string MaterialTags)
+        {
+            if (string.IsNullOrWhiteSpace(MaterialTags))
+                return;
+
+            var tags = JsonConvert.DeserializeObject<List<TagDTO>>(MaterialTags)
+                                    .Select(t => t.Value.Trim())
+                                    .Distinct(StringComparer.OrdinalIgnoreCase)
+                                    .ToList();
+
+            foreach (var title in tags)
+            {
+                var existingTag = _context.Tags.FirstOrDefault(t => t.Title.ToLower() == title.ToLower());
+                if (existingTag == null)
+                {
+                    existingTag = new Tag { Title = title };
+                    _context.Tags.Add(existingTag);
+                    _context.SaveChanges(); // Ensure that the tag gets an ID if it's new
+                }
+
+                if (material.MaterialTags == null)
+                    material.MaterialTags = new List<MaterialTag>();
+
+                // Check if the association already exists
+                if (!material.MaterialTags.Any(mt => mt.TagsId == existingTag.Id))
+                {
+                    material.MaterialTags.Add(new MaterialTag { Tag = existingTag });
+                }
+            }
         }
 
         [HttpPost]
@@ -85,9 +143,10 @@ namespace PBRmatsWeb.Controllers
         public IActionResult ResetToDefaultImage(int materialId)
         {
             var material = _materialRepository.Get(materialId);
+
             if (material != null)
             {
-                material.ImageUrl = "/uploads/defaultMaterial.webp";
+                material.ImageUrl = DefaultImage;
                 _materialRepository.Update(material);
             }
 
@@ -117,7 +176,7 @@ namespace PBRmatsWeb.Controllers
                 var filename = materialImage.FileName;
 
                 // If there's a current image that's not the default, delete it
-                if (!string.IsNullOrEmpty(currentImageUrl) && currentImageUrl != "/uploads/defaultMaterial.webp")
+                if (!string.IsNullOrEmpty(currentImageUrl) && currentImageUrl != DefaultImage)
                 {
                     var oldImagePath = Path.Combine(_environment.WebRootPath, currentImageUrl.TrimStart('/'));
                     if (System.IO.File.Exists(oldImagePath))
@@ -137,7 +196,7 @@ namespace PBRmatsWeb.Controllers
                 return currentImageUrl;
 
             // If there's no new or existing image, use the default
-            return "/uploads/defaultMaterial.webp";
+            return DefaultImage;
         }
 
         [HttpGet("RemoveImage/{code}")]
@@ -169,16 +228,15 @@ namespace PBRmatsWeb.Controllers
         private string GetImageByMaterial(string materialCode)
         {
             string imageUrl;
-            string hostUrl = "https://localhost:7072/";
             string imagePath = Path.Combine(GetFilePath(materialCode), "image.png");
 
             if (!System.IO.File.Exists(imagePath))
             {
-                imageUrl = Path.Combine(hostUrl, "uploads", "common", "noimage.png");
+                imageUrl = Path.Combine(DefaultHostUrl, "uploads", "common", "noimage.png");
             }
             else
             {
-                imageUrl = Path.Combine(hostUrl, "uploads", "Material", materialCode, "image.png");
+                imageUrl = Path.Combine(DefaultHostUrl, "uploads", "Material", materialCode, "image.png");
             }
 
             return imageUrl;

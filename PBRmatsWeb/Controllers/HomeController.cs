@@ -32,7 +32,9 @@ namespace PBRmatsWeb.Controllers
 
             if (!string.IsNullOrEmpty(searchTerm))
             {
-                materialsQuery = materialsQuery.Where(m => m.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase));
+                materialsQuery = materialsQuery.Where(m =>
+                    m.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) /*||
+                    m.Tags?.Any(t => t.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) == true*/);
             }
 
             if (categoryId.HasValue)
@@ -43,15 +45,6 @@ namespace PBRmatsWeb.Controllers
 
             var categories = _categoryService.GetList();
             var licenses = _licenseService.GetList();
-
-            materialsQuery = materialsQuery
-            .Select(material =>
-            {
-                material.Category = categories.FirstOrDefault(c => c.Id == material.CategoryId);
-                material.License = licenses.FirstOrDefault(l => l.Id == material.LicenseId);
-                return material;
-            })
-            .ToList();
 
             switch (sortBy)
             {
@@ -68,7 +61,6 @@ namespace PBRmatsWeb.Controllers
                     return materialsQuery = materialsQuery.OrderByDescending(material => material.ReleaseDate);
             }
 
-
             return materialsQuery;
         }
 
@@ -76,9 +68,21 @@ namespace PBRmatsWeb.Controllers
                                     int? categoryId = null, int? licenseSort = null)
         {
             GetData();
+
             var materials = GetFilteredMaterials(searchTerm, sortBy, categoryId, licenseSort);
 
             return View(materials);
+        }
+
+        [HttpGet]
+        public IActionResult GetMaterialDetails(int id)
+        {
+            var material = _materialRepository.Get(id);
+            if (material == null)
+            {
+                return NotFound();
+            }
+            return PartialView("_MaterialDetails", material);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

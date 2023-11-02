@@ -41,6 +41,11 @@
                 </select>
                 <span asp-validation-for="LicenseId" class="text-danger"></span>
             </div>
+
+            <div class="form-group">
+                <input name='MaterialTags' id="MaterialTags">
+            </div>
+
             <div class="form-group">
                 <label for="MaterialImage" class="control-label">Upload Image</label>
                 <input type="file" name="MaterialImage" id="MaterialImage" class="form-control" onchange="previewImage();" />

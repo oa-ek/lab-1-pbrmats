@@ -1,6 +1,8 @@
 ﻿using PBRmats.Repositories.Interfaces;
 using PBRmats.Core.Entities;
 using PBRmats.Core.Context;
+using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace PBRmats.Repositories.Repos
 {
