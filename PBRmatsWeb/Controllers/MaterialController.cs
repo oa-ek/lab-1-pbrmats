@@ -100,7 +100,7 @@ namespace PBRmatsWeb.Controllers
         {
             material.ImageUrl = await SaveMaterialImageAsync(MaterialImage, material.ImageUrl);
 
-            ParseAndAddTags(material, MaterialTags);
+            //ParseAndAddTags(material, MaterialTags);
 
             _materialRepository.Update(material);
 

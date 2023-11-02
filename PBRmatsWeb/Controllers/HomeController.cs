@@ -33,8 +33,8 @@ namespace PBRmatsWeb.Controllers
             if (!string.IsNullOrEmpty(searchTerm))
             {
                 materialsQuery = materialsQuery.Where(m =>
-                    m.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) /*||
-                    m.Tags?.Any(t => t.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) == true*/);
+                    m.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                    m.MaterialTags?.Any(t => t.Tag.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) == true);
             }
 
             if (categoryId.HasValue)
