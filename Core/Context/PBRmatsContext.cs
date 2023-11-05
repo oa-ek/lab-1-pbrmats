@@ -35,10 +35,13 @@ namespace PBRmats.Core.Context
                 .HasOne(m => m.License)
                 .WithMany();
 
-            modelBuilder.Entity<MaterialTag>()
-                .HasKey(mt => new { mt.MaterialId, mt.TagsId });
+            modelBuilder.Entity<Tag>()
+                .HasKey(d => d.Id);
 
             modelBuilder.Entity<MaterialTag>()
+                .HasKey(mt => mt.Id);
+
+            /*modelBuilder.Entity<MaterialTag>()
                 .HasOne(mt => mt.Material)
                 .WithMany(m => m.MaterialTags)
                 .HasForeignKey(mt => mt.MaterialId);
@@ -46,7 +49,7 @@ namespace PBRmats.Core.Context
             modelBuilder.Entity<MaterialTag>()
                 .HasOne(mt => mt.Tag)
                 .WithMany(t => t.MaterialTags)
-                .HasForeignKey(mt => mt.TagsId);
+                .HasForeignKey(mt => mt.TagsId);*/
 
             modelBuilder.Entity<User>()
                 .HasMany(u => u.MaterialsCollections)
@@ -69,6 +72,7 @@ namespace PBRmats.Core.Context
             modelBuilder.Entity<Material>().Navigation(material => material.License).AutoInclude();
             modelBuilder.Entity<Material>().Navigation(material => material.Category).AutoInclude();
             modelBuilder.Entity<Material>().Navigation(material => material.MaterialTags).AutoInclude();
+
             modelBuilder.Entity<MaterialTag>().Navigation(materialTag => materialTag.Material).AutoInclude();
             modelBuilder.Entity<MaterialTag>().Navigation(materialTag => materialTag.Tag).AutoInclude();
         }

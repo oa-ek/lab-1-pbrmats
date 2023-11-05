@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PBRmats.Core.Context;
 
@@ -11,9 +12,11 @@ using PBRmats.Core.Context;
 namespace PBRmats.Core.Migrations
 {
     [DbContext(typeof(PBRmatsContext))]
-    partial class PBRmatsContextModelSnapshot : ModelSnapshot
+    [Migration("20231105202004_ImprovedTags")]
+    partial class ImprovedTags
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

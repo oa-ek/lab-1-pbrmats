@@ -32,9 +32,7 @@ namespace PBRmatsWeb.Controllers
         private readonly IListService<License> _licenseService;
         private readonly IWebHostEnvironment _environment;
 
-        private PBRmatsContext _context;
-
-        public MaterialController(PBRmatsContext context, IRepository<Material, int> materialRepository,
+        public MaterialController(IRepository<Material, int> materialRepository,
                                     IRepository<Tag, int> tagRepository,
                                     IListService<Category> categoryService,
                                     IListService<License> licenseService,
@@ -45,7 +43,6 @@ namespace PBRmatsWeb.Controllers
             _categoryService = categoryService;
             _licenseService = licenseService;
             _environment = environment;
-            _context = context;
         }
 
         public IActionResult Index()
@@ -100,7 +97,7 @@ namespace PBRmatsWeb.Controllers
         {
             material.ImageUrl = await SaveMaterialImageAsync(MaterialImage, material.ImageUrl);
 
-            //ParseAndAddTags(material, MaterialTags);
+            ParseAndAddTags(material, MaterialTags);
 
             _materialRepository.Update(material);
 
@@ -117,23 +114,23 @@ namespace PBRmatsWeb.Controllers
                                     .Distinct(StringComparer.OrdinalIgnoreCase)
                                     .ToList();
 
+            var existingTags = _tagRepository.GetAll();
+
             foreach (var title in tags)
             {
-                var existingTag = _context.Tags.FirstOrDefault(t => t.Title.ToLower() == title.ToLower());
+                var existingTag = existingTags.FirstOrDefault(t => t.Title.ToLower() == title.ToLower());
                 if (existingTag == null)
                 {
                     existingTag = new Tag { Title = title };
-                    _context.Tags.Add(existingTag);
-                    _context.SaveChanges(); // Ensure that the tag gets an ID if it's new
+                    _tagRepository.Create(existingTag);
                 }
 
-                if (material.MaterialTags == null)
-                    material.MaterialTags = new List<MaterialTag>();
+                material.MaterialTags ??= new List<MaterialTag>();
 
-                // Check if the association already exists
-                if (!material.MaterialTags.Any(mt => mt.TagsId == existingTag.Id))
+                // Check if the MaterialTag already exists
+                if (!material.MaterialTags.Any(mt => mt.TagsId == existingTag.Id && mt.MaterialId == material.Id))
                 {
-                    material.MaterialTags.Add(new MaterialTag { Tag = existingTag });
+                    material.MaterialTags.Add(new MaterialTag { Tag = existingTag, Material = material });
                 }
             }
         }

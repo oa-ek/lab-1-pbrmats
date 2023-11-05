@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PBRmats.Core.Entities
 {
-    public class MaterialTag
+    public class MaterialTag : Entity
     {
         [ForeignKey("Material")]
         public int MaterialId { get; set; }
