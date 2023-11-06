@@ -78,6 +78,11 @@ namespace PBRmatsWeb
 
         private static async Task CreateRoles(RoleManager<IdentityRole> roleManager)
         {
+            if (!await roleManager.RoleExistsAsync("RootAdmin"))
+            {
+                await roleManager.CreateAsync(new IdentityRole("RootAdmin"));
+            }
+
             if (!await roleManager.RoleExistsAsync("Admin"))
             {
                 await roleManager.CreateAsync(new IdentityRole("Admin"));

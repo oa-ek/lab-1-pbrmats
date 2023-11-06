@@ -1,0 +1,62 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@model (List<IdentityUser> users, List<IdentityRole> roles, UserManager<IdentityUser> userManager)
+
+<h1>User Roles</h1>
+
+<table class="table text-light">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Roles</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.users)
+        {
+            <tr>
+                <td>@user.UserName</td>
+                <td>@user.Email</td>
+                <td>
+                    @foreach (var role in Model.roles)
+                    {
+                        if (await Model.userManager.IsInRoleAsync(user, role.Name))
+                        {
+                            <span>@role.Name</span>
+                        }
+                    }
+                </td>
+                <td>
+                    @using (Html.BeginForm("AddToRole", "Role", FormMethod.Post))
+                    {
+                        <select name="userId" hidden>
+                            <option value="@user.Id"></option>
+                        </select>
+                        <select name="roleName">
+                            @foreach (var role in Model.roles)
+                            {
+                                <option value="@role.Name">@role.Name</option>
+                            }
+                        </select>
+                        <button type="submit" class="btn btn-success">Add</button>
+                    }
+
+                    @using (Html.BeginForm("RemoveFromRole", "Role", FormMethod.Post))
+                    {
+                        <select name="userId" hidden>
+                            <option value="@user.Id"></option>
+                        </select>
+                        <select name="roleName">
+                            @foreach (var role in Model.roles)
+                            {
+                                <option value="@role.Name">@role.Name</option>
+                            }
+                        </select>
+                        <button type="submit" class="btn btn-danger">Remove</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

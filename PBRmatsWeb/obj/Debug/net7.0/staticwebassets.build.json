@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "2Sbb3LO+t1RgpkPh+Rz279jbfHbwCrTTSNkgMo2kY9k=",
+  "Hash": "ReXcvVuycKg63Hs+qqNmgZYb3N7h+Sp50lbfJ6PQjFs=",
   "Source": "PBRmatsWeb",
   "BasePath": "_content/PBRmatsWeb",
   "Mode": "Default",
@@ -2378,23 +2378,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Uploads\\Material\\ebd011e5-48bf-4b5e-b1c9-374a56b284a8.jpeg"
-    },
-    {
-      "Identity": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\wwwroot\\Uploads\\Material\\sticker.png",
-      "SourceId": "PBRmatsWeb",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\wwwroot\\",
-      "BasePath": "_content/PBRmatsWeb",
-      "RelativePath": "Uploads/Material/sticker.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Uploads\\Material\\sticker.png"
     }
   ]
 }

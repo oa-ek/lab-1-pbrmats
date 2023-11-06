@@ -3,6 +3,7 @@
 @inject SignInManager<IdentityUser> SignInManager
 
 @{
+    var isRootAdmin = false;
     var isAdmin = false;
     var isUser = false;
     if (SignInManager.IsSignedIn(User))
@@ -10,6 +11,7 @@
         var user = await UserManager.GetUserAsync(User);
         if (user != null)
         {
+            isRootAdmin = await UserManager.IsInRoleAsync(user, "RootAdmin");
             isAdmin = await UserManager.IsInRoleAsync(user, "Admin");
             isUser = await UserManager.IsInRoleAsync(user, "User");
         }
@@ -37,7 +39,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
-                    @if (isAdmin)
+                    @if (isRootAdmin || isAdmin)
                     {
                         <ul class="navbar-nav flex-grow-1">
                             <li>
@@ -52,6 +54,12 @@
                             <li>
                                 <a class="nav-link text-light" asp-area="" asp-controller="Material" asp-action="Index">MaterialsEditor</a>
                             </li>
+                            @if (isRootAdmin)
+                            {
+                                <li>
+                                    <a class="nav-link text-warning" asp-area="" asp-controller="Role" asp-action="Index">RolesEditor</a>
+                                </li>
+                            }
                         </ul>
                      }
 

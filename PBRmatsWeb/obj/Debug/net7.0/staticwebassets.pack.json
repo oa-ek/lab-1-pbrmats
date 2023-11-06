@@ -69,10 +69,6 @@
       "PackagePath": "staticwebassets\\Uploads\\Material\\ebd011e5-48bf-4b5e-b1c9-374a56b284a8.jpeg"
     },
     {
-      "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\wwwroot\\Uploads\\Material\\sticker.png",
-      "PackagePath": "staticwebassets\\Uploads\\Material\\sticker.png"
-    },
-    {
       "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\wwwroot\\Uploads\\defaultMaterial.webp",
       "PackagePath": "staticwebassets\\Uploads\\defaultMaterial.webp"
     },
