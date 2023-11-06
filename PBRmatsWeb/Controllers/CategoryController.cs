@@ -5,7 +5,7 @@ using PBRmats.Repositories.Interfaces;
 
 namespace PBRmatsWeb.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "RootAdmin, Admin")]
     public class CategoryController : Controller
     {
         private readonly IRepository<Category, int> _categoryRepository;

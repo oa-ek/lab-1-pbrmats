@@ -5,7 +5,7 @@ using PBRmats.Repositories.Interfaces;
 
 namespace PBRmatsWeb.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "RootAdmin, Admin")]
     public class LicenseController : Controller
     {
         private readonly IRepository<License, int> _licenseRepository;

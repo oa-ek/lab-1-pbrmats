@@ -18,7 +18,7 @@ namespace PBRmatsWeb.Controllers
         public string Value { get; set; }
     }
 
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "RootAdmin, Admin")]
     public class MaterialController : Controller
     {
         private const string DefaultImage = "/uploads/defaultMaterial.webp";

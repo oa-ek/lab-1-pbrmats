@@ -5,7 +5,7 @@ using PBRmats.Repositories.Interfaces;
 
 namespace PBRmatsWeb.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "RootAdmin, Admin")]
     public class TagController : Controller
     {
         private readonly IRepository<Tag, int> _tagRepository;
