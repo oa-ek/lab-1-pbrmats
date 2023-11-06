@@ -23,5 +23,6 @@ namespace PBRmats.Core.Entities
         [Required]
         public string ImageUrl { get; set; }
         public ICollection<MaterialTag> MaterialTags { get; set; }
+        public ICollection<MaterialMaterialsCollection> MaterialMaterialsCollection { get; set; }
     }
 }

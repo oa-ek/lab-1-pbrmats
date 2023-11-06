@@ -12,8 +12,8 @@ using PBRmats.Core.Context;
 namespace PBRmats.Core.Migrations
 {
     [DbContext(typeof(PBRmatsContext))]
-    [Migration("20230920190239_CategoryFK")]
-    partial class CategoryFK
+    [Migration("20231106162143_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,21 +24,6 @@ namespace PBRmats.Core.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("MaterialSource", b =>
-                {
-                    b.Property<int>("MaterialId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SourcesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("MaterialId", "SourcesId");
-
-                    b.HasIndex("SourcesId");
-
-                    b.ToTable("MaterialSources", (string)null);
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -242,6 +227,59 @@ namespace PBRmats.Core.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("PBRmats.Core.Entities.AppUser", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppUser");
+                });
+
             modelBuilder.Entity("PBRmats.Core.Entities.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -288,13 +326,24 @@ namespace PBRmats.Core.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<float>("AvgIOR")
+                        .HasColumnType("real");
+
+                    b.Property<float>("AvgMetallic")
+                        .HasColumnType("real");
+
+                    b.Property<string>("AvgSpecularColor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LicenseId")
-                        .HasColumnType("int");
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("MaterialsCollectionId")
+                    b.Property<int>("LicenseId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("ReleaseDate")
@@ -310,9 +359,53 @@ namespace PBRmats.Core.Migrations
 
                     b.HasIndex("LicenseId");
 
+                    b.ToTable("Materials");
+                });
+
+            modelBuilder.Entity("PBRmats.Core.Entities.MaterialMaterialsCollection", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("MaterialId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaterialsCollectionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MaterialId");
+
                     b.HasIndex("MaterialsCollectionId");
 
-                    b.ToTable("Materials");
+                    b.ToTable("MaterialMaterialsCollection");
+                });
+
+            modelBuilder.Entity("PBRmats.Core.Entities.MaterialTag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("MaterialId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TagsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MaterialId");
+
+                    b.HasIndex("TagsId");
+
+                    b.ToTable("MaterialTags");
                 });
 
             modelBuilder.Entity("PBRmats.Core.Entities.MaterialsCollection", b =>
@@ -323,8 +416,8 @@ namespace PBRmats.Core.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ParentUserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("AppUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -332,12 +425,12 @@ namespace PBRmats.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ParentUserId");
+                    b.HasIndex("AppUserId");
 
                     b.ToTable("MaterialsCollections");
                 });
 
-            modelBuilder.Entity("PBRmats.Core.Entities.Source", b =>
+            modelBuilder.Entity("PBRmats.Core.Entities.Tag", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -351,43 +444,7 @@ namespace PBRmats.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sources");
-                });
-
-            modelBuilder.Entity("PBRmats.Core.Entities.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("MaterialSource", b =>
-                {
-                    b.HasOne("PBRmats.Core.Entities.Material", null)
-                        .WithMany()
-                        .HasForeignKey("MaterialId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PBRmats.Core.Entities.Source", null)
-                        .WithMany()
-                        .HasForeignKey("SourcesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -455,34 +512,73 @@ namespace PBRmats.Core.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PBRmats.Core.Entities.MaterialsCollection", null)
-                        .WithMany("Materials")
-                        .HasForeignKey("MaterialsCollectionId");
-
                     b.Navigation("Category");
 
                     b.Navigation("License");
                 });
 
-            modelBuilder.Entity("PBRmats.Core.Entities.MaterialsCollection", b =>
+            modelBuilder.Entity("PBRmats.Core.Entities.MaterialMaterialsCollection", b =>
                 {
-                    b.HasOne("PBRmats.Core.Entities.User", "ParentUser")
-                        .WithMany("MaterialsCollections")
-                        .HasForeignKey("ParentUserId")
+                    b.HasOne("PBRmats.Core.Entities.Material", "Material")
+                        .WithMany()
+                        .HasForeignKey("MaterialId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ParentUser");
+                    b.HasOne("PBRmats.Core.Entities.MaterialsCollection", "MaterialsCollection")
+                        .WithMany()
+                        .HasForeignKey("MaterialsCollectionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Material");
+
+                    b.Navigation("MaterialsCollection");
+                });
+
+            modelBuilder.Entity("PBRmats.Core.Entities.MaterialTag", b =>
+                {
+                    b.HasOne("PBRmats.Core.Entities.Material", "Material")
+                        .WithMany("MaterialTags")
+                        .HasForeignKey("MaterialId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PBRmats.Core.Entities.Tag", "Tag")
+                        .WithMany("MaterialTags")
+                        .HasForeignKey("TagsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Material");
+
+                    b.Navigation("Tag");
                 });
 
             modelBuilder.Entity("PBRmats.Core.Entities.MaterialsCollection", b =>
                 {
-                    b.Navigation("Materials");
+                    b.HasOne("PBRmats.Core.Entities.AppUser", "AppUser")
+                        .WithMany("MaterialsCollections")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
                 });
 
-            modelBuilder.Entity("PBRmats.Core.Entities.User", b =>
+            modelBuilder.Entity("PBRmats.Core.Entities.AppUser", b =>
                 {
                     b.Navigation("MaterialsCollections");
+                });
+
+            modelBuilder.Entity("PBRmats.Core.Entities.Material", b =>
+                {
+                    b.Navigation("MaterialTags");
+                });
+
+            modelBuilder.Entity("PBRmats.Core.Entities.Tag", b =>
+                {
+                    b.Navigation("MaterialTags");
                 });
 #pragma warning restore 612, 618
         }

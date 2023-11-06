@@ -4,12 +4,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using PBRmats.Core.Entities;
 using PBRmats.Repositories.Interfaces;
 using Newtonsoft.Json;
-using PBRmats.Core.Context;
-using Microsoft.EntityFrameworkCore;
-using Humanizer;
-using Microsoft.AspNetCore.Http.HttpResults;
-using PBRmats.Core.Migrations;
-using System.IO;
 
 namespace PBRmatsWeb.Controllers
 {

@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PBRmats.Core.Entities;
 
 namespace PBRmats.Core.Entities
 {
     public class MaterialsCollection : Entity
     {
         public string Title { get; set; } = string.Empty;
-        public User ParentUser { get; set; }
-        public virtual ICollection<Material> Materials { get; set; }
+        public string CardColor { get; set; } = string.Empty;
+
+        [Display(Name = "User")]
+        [ForeignKey("AppUser")]
+        public Guid AppUserId { get; set; }
+        public virtual AppUser AppUser { get; set; }
+        public ICollection<MaterialMaterialsCollection> MaterialMaterialsCollection { get; set; }
     }
 }

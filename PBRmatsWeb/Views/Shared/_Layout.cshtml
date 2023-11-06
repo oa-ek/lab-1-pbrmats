@@ -39,9 +39,9 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
-                    @if (isRootAdmin || isAdmin)
-                    {
-                        <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav flex-grow-1">
+                        @if (isRootAdmin || isAdmin)
+                        {
                             <li>
                                 <a class="nav-link text-light" asp-area="" asp-controller="License" asp-action="Index">LicensesEditor</a>
                             </li>
@@ -54,14 +54,20 @@
                             <li>
                                 <a class="nav-link text-light" asp-area="" asp-controller="Material" asp-action="Index">MaterialsEditor</a>
                             </li>
-                            @if (isRootAdmin)
-                            {
-                                <li>
-                                    <a class="nav-link text-warning" asp-area="" asp-controller="Role" asp-action="Index">RolesEditor</a>
-                                </li>
-                            }
-                        </ul>
-                     }
+                        }
+                        @if (isRootAdmin)
+                        {
+                            <li>
+                                <a class="nav-link text-warning" asp-area="" asp-controller="Role" asp-action="Index">RolesEditor</a>
+                            </li>
+                        }
+                        @if (isUser && !(isRootAdmin || isAdmin))
+                        {
+                            <li>
+                                <a class="nav-link text-info" asp-area="" asp-controller="Collection" asp-action="Index">My Collections</a>
+                            </li>
+                        }
+                    </ul>
 
                      <partial name="_LoginPartial" />
                 </div>
