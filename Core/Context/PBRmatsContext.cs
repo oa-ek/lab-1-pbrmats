@@ -38,10 +38,7 @@ namespace PBRmats.Core.Context
                 .HasKey(mc => mc.Id);
 
             modelBuilder.Entity<AppUser>()
-                .HasMany(u => u.MaterialsCollections)
-                .WithOne(mc => mc.AppUser)
-                .HasForeignKey(mc => mc.AppUserId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasKey(u => u.Id);
 
             AddAutoIncludes(modelBuilder);
 
@@ -58,6 +55,9 @@ namespace PBRmats.Core.Context
 
             modelBuilder.Entity<MaterialTag>().Navigation(materialTag => materialTag.Material).AutoInclude();
             modelBuilder.Entity<MaterialTag>().Navigation(materialTag => materialTag.Tag).AutoInclude();
+
+            modelBuilder.Entity<AppUser>().Navigation(user => user.MaterialsCollections).AutoInclude();
+            modelBuilder.Entity<MaterialsCollection>().Navigation(mc => mc.AppUser).AutoInclude();
 
             modelBuilder.Entity<MaterialMaterialsCollection>().Navigation(mmc => mmc.Material).AutoInclude();
             modelBuilder.Entity<MaterialMaterialsCollection>().Navigation(mmc => mmc.MaterialsCollection).AutoInclude();

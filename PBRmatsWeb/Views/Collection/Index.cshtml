@@ -1,5 +1,50 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using PBRmats.Core.Entities
+@model IEnumerable<MaterialsCollection>
+
 @{
+    ViewBag.Title = "Collections";
 }
+
+<div class="container">
+    <h2>Collections</h2>
+
+    <div class="row">
+        <!-- New Collection Card -->
+        <div class="col-md-4 col-sm-6 mb-4 justify-content-center align-items-center">
+            <div class="card new-collection-trigger h-100 text-center">
+                <div class="card-body">
+                    <h5 class="card-title">New Collection</h5>
+                    <p class="card-text">+</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="collection-form-card col-md-4 col-sm-6 mb-4 justify-content-center align-items-center" style="display: none">
+            <div class="card element new-collection-form h-100">
+                <div class="card-body">
+                    <h5>Collection title</h5>
+                    <input type="text" id="newCollectionName" class="form-control mb-2" placeholder="Title">
+                    <input type="color" id="newCollectionColor" class="form-control mb-2" value="#ffffff" title="Choose your color">
+                    <button id="createCollection" class="btn btn-primary" data-url="@Url.Action("Create", "Collection")">Створити</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Existing Collections -->
+        @if (Model != null && Model.Any())
+        {
+            foreach (var collection in Model)
+            {
+                <div class="col-md-4 col-sm-6 mb-4 justify-content-center align-items-center">
+                    <div onclick="location.href='@Url.Action("View", "Collection", new { id = @collection.Id })'" 
+                         class="card element h-100 view-collection" 
+                         style="background-color:@collection.CardColor; cursor: pointer;">
+                        <div class="card-body">
+                            <h5 class="card-title">@collection.Title</h5>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

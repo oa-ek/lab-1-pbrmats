@@ -28,12 +28,14 @@ namespace PBRmatsWeb
 
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddScoped<IRepository<AppUser, string>, Repository<AppUser, string>>();
             builder.Services.AddScoped<IRepository<License, int>, Repository<License, int>>();
             builder.Services.AddScoped<IListService<License>, LicenseService>();
             builder.Services.AddScoped<IRepository<Category, int>, Repository<Category, int>>();
             builder.Services.AddScoped<IListService<Category>, CategoryService>();
             builder.Services.AddScoped<IRepository<Tag, int>, Repository<Tag, int>>();
             builder.Services.AddScoped<IRepository<Material, int>, Repository<Material, int>>();
+            builder.Services.AddScoped<IRepository<MaterialsCollection, int>, Repository<MaterialsCollection, int>>();
 
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()

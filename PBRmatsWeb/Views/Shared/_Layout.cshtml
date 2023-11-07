@@ -61,7 +61,7 @@
                                 <a class="nav-link text-warning" asp-area="" asp-controller="Role" asp-action="Index">RolesEditor</a>
                             </li>
                         }
-                        @if (isUser && !(isRootAdmin || isAdmin))
+                        @if (isUser/* && !(isRootAdmin || isAdmin)*/)
                         {
                             <li>
                                 <a class="nav-link text-info" asp-area="" asp-controller="Collection" asp-action="Index">My Collections</a>

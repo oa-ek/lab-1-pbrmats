@@ -12,8 +12,8 @@ using PBRmats.Core.Context;
 namespace PBRmats.Core.Migrations
 {
     [DbContext(typeof(PBRmatsContext))]
-    [Migration("20231106162143_Initial")]
-    partial class Initial
+    [Migration("20231107040317_AppUserUpd")]
+    partial class AppUserUpd
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -229,51 +229,8 @@ namespace PBRmats.Core.Migrations
 
             modelBuilder.Entity("PBRmats.Core.Entities.AppUser", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -416,8 +373,13 @@ namespace PBRmats.Core.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<Guid>("AppUserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CardColor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -520,13 +482,13 @@ namespace PBRmats.Core.Migrations
             modelBuilder.Entity("PBRmats.Core.Entities.MaterialMaterialsCollection", b =>
                 {
                     b.HasOne("PBRmats.Core.Entities.Material", "Material")
-                        .WithMany()
+                        .WithMany("MaterialMaterialsCollection")
                         .HasForeignKey("MaterialId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("PBRmats.Core.Entities.MaterialsCollection", "MaterialsCollection")
-                        .WithMany()
+                        .WithMany("MaterialMaterialsCollection")
                         .HasForeignKey("MaterialsCollectionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -560,7 +522,7 @@ namespace PBRmats.Core.Migrations
                     b.HasOne("PBRmats.Core.Entities.AppUser", "AppUser")
                         .WithMany("MaterialsCollections")
                         .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("AppUser");
@@ -573,7 +535,14 @@ namespace PBRmats.Core.Migrations
 
             modelBuilder.Entity("PBRmats.Core.Entities.Material", b =>
                 {
+                    b.Navigation("MaterialMaterialsCollection");
+
                     b.Navigation("MaterialTags");
+                });
+
+            modelBuilder.Entity("PBRmats.Core.Entities.MaterialsCollection", b =>
+                {
+                    b.Navigation("MaterialMaterialsCollection");
                 });
 
             modelBuilder.Entity("PBRmats.Core.Entities.Tag", b =>

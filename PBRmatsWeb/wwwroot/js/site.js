@@ -107,3 +107,57 @@ var tagify = new Tagify(input);
 tagify.on('change', function (e) {
     console.log('Tagify value changed:', e.detail.value);
 });
+
+$(document).ready(function () {
+    $('.new-collection-trigger').click(function () {
+        $('.collection-form-card').fadeToggle();
+    });
+
+    $('#createCollection').click(function () {
+        var collectionName = $('#newCollectionName').val().trim();
+        var collectionColor = $('#newCollectionColor').val();
+
+        if (collectionName) {
+            var postUrl = $(this).data('url');
+
+            $.ajax({
+                url: postUrl,
+                type: 'POST',
+                data: {
+                    title: collectionName,
+                    cardColor: collectionColor
+                },
+                success: function (result) {
+                    $('.new-collection-form').fadeOut();
+                    location.reload();
+                },
+                error: function () {
+                    alert('Помилка при створенні колекції.');
+                }
+            });
+        } else {
+            alert('Будь ласка, введіть назву колекції.');
+        }
+    });
+});
+
+$('.delete-collection').click(function () {
+    var collectionId = $(this).data('id');
+    var deleteUrl = $(this).data('url') + '/' + collectionId;
+
+    $.ajax({
+        url: deleteUrl,
+        type: 'POST',
+        success: function (result) {
+            if (result.success) {
+                $('#collectionCard-' + collectionId).remove();
+                location.reload();
+            } else {
+                alert(result.message);
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            alert('Error occurred while deleting the collection.');
+        }
+    });
+});

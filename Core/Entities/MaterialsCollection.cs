@@ -11,7 +11,7 @@ namespace PBRmats.Core.Entities
 
         [Display(Name = "User")]
         [ForeignKey("AppUser")]
-        public Guid AppUserId { get; set; }
+        public string AppUserId { get; set; }
         public virtual AppUser AppUser { get; set; }
         public ICollection<MaterialMaterialsCollection> MaterialMaterialsCollection { get; set; }
     }

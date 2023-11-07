@@ -200,3 +200,8 @@ select::-moz-list-drop {
 .modal-body {
     color: #9d9d9d;
 }
+
+.new-collection-trigger {
+    background-color: #30462d;
+    cursor: pointer;
+}

@@ -12,8 +12,8 @@ using PBRmats.Core.Context;
 namespace PBRmats.Core.Migrations
 {
     [DbContext(typeof(PBRmatsContext))]
-    [Migration("20231106175944_AppUserUpd")]
-    partial class AppUserUpd
+    [Migration("20231107033353_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -229,9 +229,8 @@ namespace PBRmats.Core.Migrations
 
             modelBuilder.Entity("PBRmats.Core.Entities.AppUser", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -374,8 +373,13 @@ namespace PBRmats.Core.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<Guid>("AppUserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CardColor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -478,13 +482,13 @@ namespace PBRmats.Core.Migrations
             modelBuilder.Entity("PBRmats.Core.Entities.MaterialMaterialsCollection", b =>
                 {
                     b.HasOne("PBRmats.Core.Entities.Material", "Material")
-                        .WithMany()
+                        .WithMany("MaterialMaterialsCollection")
                         .HasForeignKey("MaterialId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("PBRmats.Core.Entities.MaterialsCollection", "MaterialsCollection")
-                        .WithMany()
+                        .WithMany("MaterialMaterialsCollection")
                         .HasForeignKey("MaterialsCollectionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -531,7 +535,14 @@ namespace PBRmats.Core.Migrations
 
             modelBuilder.Entity("PBRmats.Core.Entities.Material", b =>
                 {
+                    b.Navigation("MaterialMaterialsCollection");
+
                     b.Navigation("MaterialTags");
+                });
+
+            modelBuilder.Entity("PBRmats.Core.Entities.MaterialsCollection", b =>
+                {
+                    b.Navigation("MaterialMaterialsCollection");
                 });
 
             modelBuilder.Entity("PBRmats.Core.Entities.Tag", b =>
