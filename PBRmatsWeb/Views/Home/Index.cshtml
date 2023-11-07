@@ -1,5 +1,5 @@
 ﻿@using PBRmats.Core.Entities
-@model IEnumerable<Material>
+@model (IEnumerable<Material>, IEnumerable<MaterialsCollection>)
 
 @{
     ViewData["Title"] = "Materials";
@@ -36,8 +36,29 @@
         <!-- Right Column -->
         <div class="col p-2">
             @{
-                Html.RenderPartial("_SortMaterials", Model);
+                Html.RenderPartial("_SortMaterials", Model.Item1);
             }
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="collectionsModal" tabindex="-1" aria-labelledby="collectionsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content window h-100">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="collectionsModalLabel">Collections</h5>
+                <button type="button" class="btn-close" style="background-color: white;" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body overflow-y-auto">
+                <div class="row">
+                    @{
+                        Html.RenderPartial("_Collections", Model.Item2);
+                    }
+                </div>
+
+             </div>
         </div>
     </div>
 </div>

@@ -1,0 +1,18 @@
+﻿@using PBRmats.Core.Entities
+@model IEnumerable<MaterialsCollection>
+
+@if (Model != null && Model.Any())
+{
+    foreach (var collection in Model)
+    {
+        <div class="col-md-4 col-sm-6 mb-4 justify-content-center align-items-center">
+            <div onclick="location.href='@Url.Action("View", "Collection", new { id = @collection.Id })'"
+                 class="card element h-100 view-collection"
+                 style="background-color:@collection.CardColor; cursor: pointer;">
+                <div class="card-body">
+                    <h5 class="card-title">@collection.Title</h5>
+                </div>
+            </div>
+        </div>
+    }
+}

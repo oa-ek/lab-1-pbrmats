@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
 using PBRmats.Core.Entities;
 using PBRmats.Repositories.Interfaces;
@@ -10,22 +11,48 @@ namespace PBRmatsWeb.Controllers
     public class HomeController : Controller
     {
         private readonly IRepository<Material, int> _materialRepository;
+        private readonly IRepository<MaterialsCollection, int> _collectionRepository;
         private readonly IListService<Category> _categoryService;
         private readonly IListService<License> _licenseService;
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(IRepository<Material, int> materialRepository,
-                                    IListService<Category> categoryService, 
-                                    IListService<License> licenseService,
-                                    ILogger<HomeController> logger)
+                                IRepository<MaterialsCollection, int> collectionRepository,
+                                IListService<Category> categoryService, 
+                                IListService<License> licenseService)
         {
             _materialRepository = materialRepository;
+            _collectionRepository = collectionRepository;
             _categoryService = categoryService;
             _licenseService = licenseService;
-            _logger = logger;
         }
 
-        private IEnumerable<Material> GetFilteredMaterials(string searchTerm = "", string sortBy = "", 
+        public async Task<IActionResult> Index([FromServices] UserManager<IdentityUser> userManager,
+                                                string searchTerm = "",
+                                                string sortBy = "",
+                                                int? categoryId = null,
+                                                int? licenseSort = null)
+        {
+            GetData();
+
+            IEnumerable<Material> materials = GetFilteredMaterials(searchTerm, sortBy, categoryId, licenseSort);
+            IEnumerable<MaterialsCollection> collections;
+
+            var user = await userManager.GetUserAsync(User);
+            if (user != null)
+            {
+                collections = _collectionRepository.GetAll().Where(c => c.AppUserId == user.Id);
+            }
+            else
+            {
+                collections = new List<MaterialsCollection>();
+            }
+
+            return View((materials, collections));
+        }
+
+
+        private IEnumerable<Material> GetFilteredMaterials(string searchTerm = "", string sortBy = "",
                                                             int? categoryId = null, int? licenseSort = null)
         {
             var materialsQuery = _materialRepository.GetAll();
@@ -62,16 +89,6 @@ namespace PBRmatsWeb.Controllers
             }
 
             return materialsQuery;
-        }
-
-        public IActionResult Index(string searchTerm = "", string sortBy = "", 
-                                    int? categoryId = null, int? licenseSort = null)
-        {
-            GetData();
-
-            var materials = GetFilteredMaterials(searchTerm, sortBy, categoryId, licenseSort);
-
-            return View(materials);
         }
 
         [HttpGet]
