@@ -3,41 +3,19 @@
 
 @{
     ViewData["Title"] = "View";
+    var materials = Model.MaterialMaterialsCollection?.Select(m => m.Material) ?? Enumerable.Empty<Material>();
 }
 
-<h1>View</h1>
-
-<div>
-    <h4>MaterialsCollection</h4>
-    <a data-url="@Url.Action("Delete", "Collection")" data-id="@Model.Id" class="btn btn-danger delete-collection">Delete</a>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CardColor)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CardColor)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AppUserId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AppUserId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Index">Back to List</a>
+<div class="container">
+    <div>
+        <h1>Collection: @Model.Title</h1>
+        <form asp-action="Delete" asp-route-id="@Model.Id">
+            <a asp-action="Index" class="btn btn-info">Back to Collections</a>
+            <input type="submit" value="Delete" class="btn btn-outline-danger" />
+        </form>
+    </div>
+    
+    @{
+        Html.RenderPartial("_Materials", materials);
+    }
 </div>

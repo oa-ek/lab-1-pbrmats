@@ -55,18 +55,17 @@ namespace PBRmatsWeb.Controllers
             return Json(new { success = true, message = "Its work :)" });
         }
 
-        [HttpPost]
         public IActionResult Delete(int id)
         {
-            var collection = _collectionRepository.Get(id);
-            if (collection == null)
-            {
-                return Json(new { success = false, message = "Collection not found." });
-            }
+            return View(_collectionRepository.Get(id));
+        }
 
-            _collectionRepository.Delete(collection);
+        [HttpPost]
+        public IActionResult Delete(MaterialsCollection materialsCollection)
+        {
+            _collectionRepository.Delete(materialsCollection);
 
-            return Json(new { success = true, message = "Collection deleted successfully." });
+            return RedirectToAction("Index");
         }
 
         public IActionResult View(int id)

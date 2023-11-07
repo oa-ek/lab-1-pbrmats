@@ -1,0 +1,33 @@
+﻿@using PBRmats.Core.Entities
+@model IEnumerable<Material>
+
+@if (Model != null && Model.Any())
+{
+    <div class="row">
+        @foreach (var material in Model)
+        {
+            <div class="col-xl-2-4 col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center align-items-center mb-2">
+                <div class="card material-card"
+                     data-toggle="modal"
+                     data-target="#materialDetailModal"
+                     data-material-id="@material.Id"
+                     data-material-title="@material.Title"
+                     data-material-image="@material.ImageUrl"
+                     data-material-color="@material.AvgColor"
+                     data-material-specularcolor="@material.AvgSpecularColor"
+                     data-material-metallic="@material.AvgMetallic"
+                     data-material-ior="@material.AvgIOR"
+                     data-material-date="@material.ReleaseDate"
+                     data-material-category="@material.Category.Title"
+                     data-material-license="@material.License.Title">
+                    <img src="@material.ImageUrl" alt="@material.Title" class="card-img-top material-img absolute z-1 top-0 col d-flex flex-column fill-height justify-center align-center">
+                    <p class="card-text text-center">@material.Title</p>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>No materials available.</p>
+}

@@ -140,24 +140,3 @@ $(document).ready(function () {
         }
     });
 });
-
-$('.delete-collection').click(function () {
-    var collectionId = $(this).data('id');
-    var deleteUrl = $(this).data('url') + '/' + collectionId;
-
-    $.ajax({
-        url: deleteUrl,
-        type: 'POST',
-        success: function (result) {
-            if (result.success) {
-                $('#collectionCard-' + collectionId).remove();
-                location.reload();
-            } else {
-                alert(result.message);
-            }
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-            alert('Error occurred while deleting the collection.');
-        }
-    });
-});
