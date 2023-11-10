@@ -8,7 +8,7 @@ namespace PBRmats.Core.Entities
         public int MaterialsCollectionId { get; set; }
         public MaterialsCollection MaterialsCollection { get; set; }
 
-        [ForeignKey("User")]
+        [ForeignKey("Material")]
         public int MaterialId { get; set; }
         public Material Material { get; set; }
     }

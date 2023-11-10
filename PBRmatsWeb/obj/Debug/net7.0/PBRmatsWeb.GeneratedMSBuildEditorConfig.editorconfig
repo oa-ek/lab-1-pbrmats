@@ -36,6 +36,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Study/C\#/lab-1-pbrmats/PBRmatsWeb/Views/Collection/AddMaterialToCollection.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29sbGVjdGlvblxBZGRNYXRlcmlhbFRvQ29sbGVjdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Study/C\#/lab-1-pbrmats/PBRmatsWeb/Views/Collection/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29sbGVjdGlvblxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -100,8 +104,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Study/C\#/lab-1-pbrmats/PBRmatsWeb/Views/Shared/_MaterialDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9NYXRlcmlhbERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Study/C\#/lab-1-pbrmats/PBRmatsWeb/Views/Shared/_Materials.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9NYXRlcmlhbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Study/C\#/lab-1-pbrmats/PBRmatsWeb/Views/Shared/_MaterialToCollections.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9NYXRlcmlhbFRvQ29sbGVjdGlvbnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Study/C\#/lab-1-pbrmats/PBRmatsWeb/Views/Shared/_ValidationScriptsPartial.cshtml]

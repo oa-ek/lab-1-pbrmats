@@ -58,6 +58,7 @@ namespace PBRmats.Core.Context
 
             modelBuilder.Entity<AppUser>().Navigation(user => user.MaterialsCollections).AutoInclude();
             modelBuilder.Entity<MaterialsCollection>().Navigation(mc => mc.AppUser).AutoInclude();
+            modelBuilder.Entity<MaterialsCollection>().Navigation(material => material.MaterialMaterialsCollection).AutoInclude();
 
             modelBuilder.Entity<MaterialMaterialsCollection>().Navigation(mmc => mmc.Material).AutoInclude();
             modelBuilder.Entity<MaterialMaterialsCollection>().Navigation(mmc => mmc.MaterialsCollection).AutoInclude();

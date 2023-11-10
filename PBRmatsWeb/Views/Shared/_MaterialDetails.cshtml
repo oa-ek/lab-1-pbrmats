@@ -1,0 +1,73 @@
+﻿@using PBRmats.Core.Entities
+@using Microsoft.AspNetCore.Identity
+
+@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
+    var isRootAdmin = false;
+    var isAdmin = false;
+    var isUser = false;
+    if (SignInManager.IsSignedIn(User))
+    {
+        var user = await UserManager.GetUserAsync(User);
+        if (user != null)
+        {
+            isRootAdmin = await UserManager.IsInRoleAsync(user, "RootAdmin");
+            isAdmin = await UserManager.IsInRoleAsync(user, "Admin");
+            isUser = await UserManager.IsInRoleAsync(user, "User");
+        }
+    }
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<div class="modal fade" id="materialDetailModal" tabindex="-1" role="dialog" aria-labelledby="materialDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content element">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalMaterialTitle"></h5>
+                <button type="button" class="btn-close" style="background-color: white;" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3 id="modalMaterialTitle"></h3>
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="ml-2" id="modalMaterialColor"></span>
+                            <div id="modalMaterialColorDisplay" style="width: 25px; height: 25px; border: 1px solid #000;"></div>
+                        </div>
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="ml-2" id="modalMaterialSpecularColor"></span>
+                            <div id="modalMaterialSpecularColorDisplay" style="width: 25px; height: 25px; border: 1px solid #000;"></div>
+                        </div>
+                        <p id="modalMaterialMetallic"></p>
+                        <p id="modalMaterialIOR"></p>
+                        <p id="modalMaterialCategory"></p>
+                        <p id="modalMaterialLicense"></p>
+                        <p id="modalMaterialDate"></p>
+                        @if (isUser/* && !(isRootAdmin || isAdmin)*/)
+                        {
+                            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#collectionsModal">
+                                Add To Collection
+                            </button>
+
+                            @if (isUser && ViewData["IsViewContext"] as bool? == true)
+                            {
+                                <button type="button" 
+                                        class="btn btn-outline-warning remove-from-collection"
+                                        data-collection-id="@ViewData["CollectionId"]">
+                                    Remove from Collection
+                                </button>
+                            }
+                        }
+                    </div>
+                    <div class="col-md-6">
+                        <img id="modalMaterialImage" src="" alt="Material Image" class="img-item img-fluid mb-3">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,15 +1,36 @@
 ﻿@using PBRmats.Core.Entities
-@model MaterialsCollection
+@using Microsoft.AspNetCore.Identity
+
+@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<IdentityUser> SignInManager
+
+@model (MaterialsCollection, IEnumerable<MaterialsCollection>)
 
 @{
     ViewData["Title"] = "View";
-    var materials = Model.MaterialMaterialsCollection?.Select(m => m.Material) ?? Enumerable.Empty<Material>();
+    ViewData["IsViewContext"] = true;
+    ViewData["CollectionId"] = @Model.Item1.Id;
+
+    var materials = Model.Item1.MaterialMaterialsCollection.Select(m => m.Material);
+    var isRootAdmin = false;
+    var isAdmin = false;
+    var isUser = false;
+    if (SignInManager.IsSignedIn(User))
+    {
+        var user = await UserManager.GetUserAsync(User);
+        if (user != null)
+        {
+            isRootAdmin = await UserManager.IsInRoleAsync(user, "RootAdmin");
+            isAdmin = await UserManager.IsInRoleAsync(user, "Admin");
+            isUser = await UserManager.IsInRoleAsync(user, "User");
+        }
+    }
 }
 
-<div class="container">
+<div class="container element border border-success rounded">
     <div>
-        <h1>Collection: @Model.Title</h1>
-        <form asp-action="Delete" asp-route-id="@Model.Id">
+        <h1>Collection: @Model.Item1.Title</h1>
+        <form asp-action="Delete" asp-route-id="@Model.Item1.Id">
             <a asp-action="Index" class="btn btn-info">Back to Collections</a>
             <input type="submit" value="Delete" class="btn btn-outline-danger" />
         </form>
@@ -19,3 +40,8 @@
         Html.RenderPartial("_Materials", materials);
     }
 </div>
+
+@{
+    Html.RenderPartial("_MaterialDetails");
+    Html.RenderPartial("_MaterialToCollections", @Model.Item2);
+}

@@ -1,9 +1,28 @@
 ﻿@using PBRmats.Core.Entities
+@using Microsoft.AspNetCore.Identity
+
+@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<IdentityUser> SignInManager
+
 @model (IEnumerable<Material>, IEnumerable<MaterialsCollection>)
+
 
 @{
     ViewData["Title"] = "Materials";
     var categories = ViewData["Categories"] as IEnumerable<Category>;
+    var isRootAdmin = false;
+    var isAdmin = false;
+    var isUser = false;
+    if (SignInManager.IsSignedIn(User))
+    {
+        var user = await UserManager.GetUserAsync(User);
+        if (user != null)
+        {
+            isRootAdmin = await UserManager.IsInRoleAsync(user, "RootAdmin");
+            isAdmin = await UserManager.IsInRoleAsync(user, "Admin");
+            isUser = await UserManager.IsInRoleAsync(user, "User");
+        }
+    }
 }
 
 <div class="container-fluid h-100">
@@ -42,23 +61,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="collectionsModal" tabindex="-1" aria-labelledby="collectionsModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content window h-100">
-
-            <div class="modal-header">
-                <h5 class="modal-title" id="collectionsModalLabel">Collections</h5>
-                <button type="button" class="btn-close" style="background-color: white;" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-
-            <div class="modal-body overflow-y-auto">
-                <div class="row">
-                    @{
-                        Html.RenderPartial("_Collections", Model.Item2);
-                    }
-                </div>
-
-             </div>
-        </div>
-    </div>
-</div>
+@{
+    Html.RenderPartial("_MaterialDetails");
+    Html.RenderPartial("_MaterialToCollections", Model.Item2);
+}

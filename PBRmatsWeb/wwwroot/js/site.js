@@ -132,11 +132,96 @@ $(document).ready(function () {
                     location.reload();
                 },
                 error: function () {
-                    alert('Помилка при створенні колекції.');
+                    alert('Error with creating collection.');
                 }
             });
         } else {
-            alert('Будь ласка, введіть назву колекції.');
+            alert('Enter title.');
         }
     });
+});
+
+$('.collection-card').click(function () {
+    var selectedMaterialId = $('#selectedMaterialId').val();
+    var selectedCollectionId = $(this).data('collection-id');
+    var postUrl = $(this).data('url');
+    
+    $.ajax({
+        url: postUrl,
+        type: 'POST',
+        data: {
+            materialId: selectedMaterialId,
+            collectionId: selectedCollectionId
+        },
+        success: function (result) {
+            if (!result.success) {
+                alert(result.message);
+            }
+            else {
+                alert('Material added to collection successfully.');
+            }
+        },
+        error: function (xhr) {
+            alert('Error with adding to collection: ' + xhr.responseText);
+        }
+    });
+});
+
+$('.remove-from-collection').click(function () {
+    var selectedMaterialId = $('#selectedMaterialId').val();
+    var selectedCollectionId = $(this).data('collection-id');
+    var postUrl = '/Collection/RemoveMaterialFromCollection';
+
+    $.ajax({
+        url: postUrl,
+        type: 'POST',
+        data: {
+            materialId: selectedMaterialId,
+            collectionId: selectedCollectionId
+        },
+        success: function (result) {
+            if (result.success) {
+                location.reload();
+                // $(this).closest('.material-item').remove();
+            } else {
+                alert(result.message);
+            }
+        },
+        error: function (xhr) {
+            alert('Error with removing from collection: ' + xhr.responseText);
+        }
+    });
+});
+
+$(document).on('click', '.material-card', function() {
+    var selectedMaterialId = $(this).data('material-id');
+    var materialTitle = $(this).data('material-title');
+    var materialImage = $(this).data('material-image');
+
+    var materialColor = $(this).data('material-color');
+    var materialSpecularColor = $(this).data('material-specularcolor');
+
+    var materialMetallic = $(this).data('material-metallic');
+    var materialIOR = $(this).data('material-metallic');
+
+    var materialCategory = $(this).data('material-category');
+    var materialLicense = $(this).data('material-license');
+    var materialDate = $(this).data('material-date');
+
+    $('#selectedMaterialId').val(selectedMaterialId);
+    $('#modalMaterialTitle').text(materialTitle);
+    $('#modalMaterialImage').attr('src', materialImage);
+
+    $('#modalMaterialColor').text('Avarage Color: ' + materialColor);
+    $('#modalMaterialColorDisplay').css('background-color', materialColor);
+
+    $('#modalMaterialSpecularColor').text('Avarage Specular Color: ' + materialSpecularColor);
+    $('#modalMaterialSpecularColorDisplay').css('background-color', materialSpecularColor);
+
+    $('#modalMaterialMetallic').text('Avarage Metallic: ' + materialMetallic);
+    $('#modalMaterialIOR').text('Avarage IOR: ' + materialIOR);
+
+    $('#modalMaterialCategory').text('Category: ' + materialCategory);
+    $('#modalMaterialLicense').text('License: ' + materialLicense);
+    $('#modalMaterialDate').text('Release Date: ' + materialDate);
 });
