@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using PBRmats.Core.Entities;
 using PBRmats.Repositories.Interfaces;
 using Newtonsoft.Json;
-using System.IO;
-using Microsoft.IdentityModel.Tokens;
 
 namespace PBRmatsWeb.Controllers
 {

@@ -270,3 +270,9 @@ D:\Study\C#\lab-1-pbrmats\PBRmatsWeb\bin\Debug\net7.0\PBRmats.Domain.dll
 D:\Study\C#\lab-1-pbrmats\PBRmatsWeb\bin\Debug\net7.0\PBRmats.Persistence.dll
 D:\Study\C#\lab-1-pbrmats\PBRmatsWeb\bin\Debug\net7.0\PBRmats.Domain.pdb
 D:\Study\C#\lab-1-pbrmats\PBRmatsWeb\bin\Debug\net7.0\PBRmats.Persistence.pdb
+D:\Study\C#\lab-1-pbrmats\PBRmatsWeb\bin\Debug\net7.0\PBRmats.Application.deps.json
+D:\Study\C#\lab-1-pbrmats\PBRmatsWeb\bin\Debug\net7.0\PBRmats.Application.runtimeconfig.json
+D:\Study\C#\lab-1-pbrmats\PBRmatsWeb\bin\Debug\net7.0\PBRmats.Application.exe
+D:\Study\C#\lab-1-pbrmats\PBRmatsWeb\bin\Debug\net7.0\PBRmats.Application.dll
+D:\Study\C#\lab-1-pbrmats\PBRmatsWeb\bin\Debug\net7.0\PBRmats.Application.pdb
+D:\Study\C#\lab-1-pbrmats\PBRmatsWeb\obj\Debug\net7.0\PBRmats.Web.MvcApplicationPartsAssemblyInfo.cs

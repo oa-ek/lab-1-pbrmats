@@ -22,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Core\PBRmats.Domain.csproj" />
     <ProjectReference Include="..\PBRmats.Repositories\PBRmats.Persistence.csproj" />
+    <ProjectReference Include="..\PBRmats.UseCases\PBRmats.Application.csproj" />
   </ItemGroup>
 
 </Project>
