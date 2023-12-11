@@ -29,6 +29,10 @@
       "PackagePath": "staticwebassets\\Uploads\\Material\\2ef2c29f-abe5-4556-a138-eb9e0a7138e3.jpeg"
     },
     {
+      "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\wwwroot\\Uploads\\Material\\30f157aa130398c1ff25684f95476763-Full.png",
+      "PackagePath": "staticwebassets\\Uploads\\Material\\30f157aa130398c1ff25684f95476763-Full.png"
+    },
+    {
       "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\wwwroot\\Uploads\\Material\\567900d3-81ce-45b8-b19c-1e3b0889ee2a.jpeg",
       "PackagePath": "staticwebassets\\Uploads\\Material\\567900d3-81ce-45b8-b19c-1e3b0889ee2a.jpeg"
     },
@@ -71,6 +75,10 @@
     {
       "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\wwwroot\\Uploads\\Material\\ebd011e5-48bf-4b5e-b1c9-374a56b284a8.jpeg",
       "PackagePath": "staticwebassets\\Uploads\\Material\\ebd011e5-48bf-4b5e-b1c9-374a56b284a8.jpeg"
+    },
+    {
+      "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\wwwroot\\Uploads\\Material\\zips\\ngrok-v3-stable-windows-amd64.zip",
+      "PackagePath": "staticwebassets\\Uploads\\Material\\zips\\ngrok-v3-stable-windows-amd64.zip"
     },
     {
       "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\wwwroot\\Uploads\\Material\\zips\\test.zip",

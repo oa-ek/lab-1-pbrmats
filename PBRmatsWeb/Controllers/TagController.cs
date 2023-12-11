@@ -65,8 +65,8 @@ namespace PBRmatsWeb.Controllers
         [HttpPost]
         public IActionResult Delete(TagDTO tag)
         {
-            var tagToEdit = GetTag(tag.Id);
-            _tagRepository.Delete(tagToEdit);
+            var tagToDelete = GetTag(tag.Id);
+            _tagRepository.Delete(tagToDelete);
 
             return RedirectToAction("Index");
         }

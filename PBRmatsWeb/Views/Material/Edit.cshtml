@@ -88,8 +88,6 @@
                 <label for="MaterialImage">Material Image</label>
                 <input type="file" name="MaterialImage" id="MaterialImage" class="form-control" onchange="previewImage();" />
             </div>
-                <input type="hidden" name="materialId" value="@Model.Id" />
-                <button class="btn btn-warning">Reset to Default Image</button>
             <div class="form-group">
                 <img id="preview" src="@Model.ImageUrl" alt="Image Preview" style="max-width: 200px;" />
             </div>

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "KlaAWkjFZK3SVj4WfXY1X7RYzl9+PCrHSmsRorOkzrE=",
+  "Hash": "k66A3vHznf/xl9qONk90iU9w63948K+JVTpO/xN+WmQ=",
   "Source": "PBRmats.Web",
   "BasePath": "_content/PBRmats.Web",
   "Mode": "Default",
@@ -2227,6 +2227,23 @@
       "OriginalItemSpec": "wwwroot\\Uploads\\Material\\2ef2c29f-abe5-4556-a138-eb9e0a7138e3.jpeg"
     },
     {
+      "Identity": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\wwwroot\\Uploads\\Material\\30f157aa130398c1ff25684f95476763-Full.png",
+      "SourceId": "PBRmats.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\wwwroot\\",
+      "BasePath": "_content/PBRmats.Web",
+      "RelativePath": "Uploads/Material/30f157aa130398c1ff25684f95476763-Full.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\Material\\30f157aa130398c1ff25684f95476763-Full.png"
+    },
+    {
       "Identity": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\wwwroot\\Uploads\\Material\\567900d3-81ce-45b8-b19c-1e3b0889ee2a.jpeg",
       "SourceId": "PBRmats.Web",
       "SourceType": "Discovered",
@@ -2395,6 +2412,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Uploads\\Material\\ebd011e5-48bf-4b5e-b1c9-374a56b284a8.jpeg"
+    },
+    {
+      "Identity": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\wwwroot\\Uploads\\Material\\zips\\ngrok-v3-stable-windows-amd64.zip",
+      "SourceId": "PBRmats.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\wwwroot\\",
+      "BasePath": "_content/PBRmats.Web",
+      "RelativePath": "Uploads/Material/zips/ngrok-v3-stable-windows-amd64.zip",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\Material\\zips\\ngrok-v3-stable-windows-amd64.zip"
     },
     {
       "Identity": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\wwwroot\\Uploads\\Material\\zips\\test.zip",

@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using PBRmats.Core.Entities;
 using PBRmats.Repositories.Interfaces;
 using Newtonsoft.Json;
+using PBRmats.Application.DTOs;
+using System.ComponentModel;
 
 namespace PBRmatsWeb.Controllers
 {
@@ -22,24 +24,34 @@ namespace PBRmatsWeb.Controllers
 
         private readonly IRepository<Material, int> _materialRepository;
         private readonly IRepository<Tag, int> _tagRepository;
-        private readonly IListService<Category> _categoryService;
-        private readonly IListService<License> _licenseService;
+        private readonly IRepository<Category, int> _categoryRepository;
+        private readonly IRepository<PBRmats.Core.Entities.License, int> _licenseRepository;
         private readonly IWebHostEnvironment _environment;
         private readonly ILogger<MaterialController> _logger;
 
         public MaterialController(IRepository<Material, int> materialRepository,
                                     IRepository<Tag, int> tagRepository,
-                                    IListService<Category> categoryService,
-                                    IListService<License> licenseService,
+                                    IRepository<Category, int> categoryRepository,
+                                    IRepository<PBRmats.Core.Entities.License, int> licenseRepository,
                                     IWebHostEnvironment environment,
                                     ILogger<MaterialController> logger)
         {
             _materialRepository = materialRepository;
             _tagRepository = tagRepository;
-            _categoryService = categoryService;
-            _licenseService = licenseService;
+            _categoryRepository = categoryRepository;
+            _licenseRepository = licenseRepository;
             _environment = environment;
             _logger = logger;
+        }
+
+        private Material GetMaterial(int id) =>
+            _materialRepository.Get(id);
+
+        private MaterialDTO SetDTO(int id)
+        {
+            var tagEntity = GetMaterial(id);
+
+            return new MaterialDTO() { Id = tagEntity.Id, Title = tagEntity.Title };
         }
 
         public IActionResult Index()
@@ -64,47 +76,48 @@ namespace PBRmatsWeb.Controllers
             return View();
         }
 
+        public IActionResult Edit(int id)
+        {
+            PopulateDropdowns();
+
+            return View(GetMaterial(id));
+        }
+
+        public IActionResult Delete(int id) =>
+            View(SetDTO(id));
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Material material, IFormFile? MaterialImage, IFormFile? MaterialZipFile, string MaterialTags)
+        public async Task<IActionResult> Create(MaterialDTO material, IFormFile? MaterialImage, IFormFile? MaterialZipFile, string MaterialTags)
         {
+            var newMaterial = new Material() 
+            { 
+                Title = material.Title,
+                AvgColor = material.AvgColor,
+                AvgSpecularColor = material.AvgSpecularColor,
+                AvgMetallic = material.AvgMetallic,
+                AvgIOR = material.AvgIOR,
+                ReleaseDate = material.ReleaseDate,
+                LicenseId = material.LicenseId,
+                CategoryId = material.CategoryId,
+                ImageUrl = material.ImageUrl,
+                ZipFileUrl = material.ZipFileUrl,
+                License = _licenseRepository.Get(material.LicenseId),
+                Category = _categoryRepository.Get(material.CategoryId),
+                MaterialTags = null,
+                MaterialMaterialsCollection = null
+            };
+
             if (MaterialZipFile != null && MaterialZipFile.Length > 0)
                 material.ZipFileUrl = await SaveMaterialZipFileAsync(MaterialZipFile);
 
             material.ImageUrl = await SaveMaterialImageAsync(MaterialImage);
 
-            ParseAndAddTags(material, MaterialTags);
+            ParseAndAddTags(newMaterial, MaterialTags);
 
-            _materialRepository.Create(material);
+            _materialRepository.Create(newMaterial);
 
             return RedirectToAction(nameof(Index));
-        }
-
-        private async Task<string> SaveMaterialZipFileAsync(IFormFile? materialZipFile)
-        {
-            if (materialZipFile == null)
-                return Path.Combine("/uploads/Material/zips/", materialZipFile.FileName); // Return the relative path
-            
-            var uploadsFolderPath = Path.Combine(_environment.WebRootPath, "uploads", "Material", "zips");
-            if (!Directory.Exists(uploadsFolderPath))
-                Directory.CreateDirectory(uploadsFolderPath);
-
-            var filePath = Path.Combine(uploadsFolderPath, materialZipFile.FileName);
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
-            {
-                await materialZipFile.CopyToAsync(fileStream);
-            }
-
-            return Path.Combine("/uploads/Material/zips/", materialZipFile.FileName); // Return the relative path
-        }
-
-        public IActionResult Edit(int id)
-        {
-            PopulateDropdowns();
-
-            var material = _materialRepository.Get(id);
-
-            return View(material);
         }
 
         [HttpPost]
@@ -127,6 +140,34 @@ namespace PBRmatsWeb.Controllers
             _materialRepository.Update(material);
 
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public IActionResult Delete(MaterialDTO material)
+        {
+            var materialToDelete = GetMaterial(material.Id);
+            DeleteMaterialZipFile(material.ZipFileUrl);
+            _materialRepository.Delete(materialToDelete);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        private async Task<string> SaveMaterialZipFileAsync(IFormFile? materialZipFile)
+        {
+            if (materialZipFile == null)
+                return Path.Combine("/uploads/Material/zips/", materialZipFile.FileName); // Return the relative path
+            
+            var uploadsFolderPath = Path.Combine(_environment.WebRootPath, "uploads", "Material", "zips");
+            if (!Directory.Exists(uploadsFolderPath))
+                Directory.CreateDirectory(uploadsFolderPath);
+
+            var filePath = Path.Combine(uploadsFolderPath, materialZipFile.FileName);
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await materialZipFile.CopyToAsync(fileStream);
+            }
+
+            return Path.Combine("/uploads/Material/zips/", materialZipFile.FileName); // Return the relative path
         }
 
         private void ParseAndAddTags(Material material, string MaterialTags)
@@ -160,30 +201,6 @@ namespace PBRmatsWeb.Controllers
             }
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult ResetToDefaultImage(int materialId)
-        {
-            var material = _materialRepository.Get(materialId);
-
-            if (material != null)
-            {
-                material.ImageUrl = DefaultImage;
-                _materialRepository.Update(material);
-            }
-
-            return View(_materialRepository.Get(materialId));
-        }
-
-        public IActionResult Delete(int id)
-        {
-            var material = _materialRepository.Get(id);
-            if (material == null)
-                return NotFound();
-
-            return View(material);
-        }
-
         private void DeleteMaterialZipFile(string zipFileUrl)
         {
             if (string.IsNullOrEmpty(zipFileUrl))
@@ -201,15 +218,6 @@ namespace PBRmatsWeb.Controllers
             {
                 _logger.LogError(ex, "Error deleting file {FilePath}", filePath);
             }
-        }
-
-        [HttpPost]
-        public IActionResult Delete(Material material)
-        {
-            DeleteMaterialZipFile(material.ZipFileUrl);
-            _materialRepository.Delete(material);
-
-            return RedirectToAction(nameof(Index));
         }
 
         private async Task<string> SaveMaterialImageAsync(IFormFile? materialImage, string currentImageUrl = null)
@@ -290,8 +298,8 @@ namespace PBRmatsWeb.Controllers
 
         private void PopulateDropdowns()
         {
-            ViewData["Categories"] = new SelectList(_categoryService.GetList(), nameof(Category.Id), nameof(Category.Title));
-            ViewData["Licenses"] = new SelectList(_licenseService.GetList(), nameof(License.Id), nameof(License.Title));
+            ViewData["Categories"] = new SelectList(_categoryRepository.GetAll(), nameof(Category.Id), nameof(Category.Title));
+            ViewData["Licenses"] = new SelectList(_licenseRepository.GetAll(), nameof(PBRmats.Core.Entities.License.Id), nameof(PBRmats.Core.Entities.License.Title));
         }
     }
 }
