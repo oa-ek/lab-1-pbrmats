@@ -4,11 +4,6 @@ using PBRmats.Core.Context;
 using PBRmats.Core.Entities;
 using PBRmats.Repositories.Interfaces;
 using PBRmats.Repositories.Repos;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Builder;
-using System;
-using System.Threading.Tasks;
-
 
 namespace PBRmatsWeb
 {

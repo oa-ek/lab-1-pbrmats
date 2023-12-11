@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ReXcvVuycKg63Hs+qqNmgZYb3N7h+Sp50lbfJ6PQjFs=",
+  "Hash": "ZjA9QhSnTUFMC9LWaLHeFwxHjQ5GbpqTITBZsdCUZCk=",
   "Source": "PBRmatsWeb",
   "BasePath": "_content/PBRmatsWeb",
   "Mode": "Default",
@@ -2108,6 +2108,23 @@
       "OriginalItemSpec": "wwwroot\\Uploads\\defaultMaterial.webp"
     },
     {
+      "Identity": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\wwwroot\\Uploads\\Material\\_1a664268-c58e-4bea-943b-ed6a2bacb1e5.jpg",
+      "SourceId": "PBRmatsWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\wwwroot\\",
+      "BasePath": "_content/PBRmatsWeb",
+      "RelativePath": "Uploads/Material/_1a664268-c58e-4bea-943b-ed6a2bacb1e5.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\Material\\_1a664268-c58e-4bea-943b-ed6a2bacb1e5.jpg"
+    },
+    {
       "Identity": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\wwwroot\\Uploads\\Material\\09a87114-b6dd-4dee-a822-f47af9fe8efd.jpeg",
       "SourceId": "PBRmatsWeb",
       "SourceType": "Discovered",
@@ -2378,6 +2395,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Uploads\\Material\\ebd011e5-48bf-4b5e-b1c9-374a56b284a8.jpeg"
+    },
+    {
+      "Identity": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\wwwroot\\Uploads\\Material\\zips\\test.zip",
+      "SourceId": "PBRmatsWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\wwwroot\\",
+      "BasePath": "_content/PBRmatsWeb",
+      "RelativePath": "Uploads/Material/zips/test.zip",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\Material\\zips\\test.zip"
+    },
+    {
+      "Identity": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\wwwroot\\Uploads\\Material\\zips\\test2.zip",
+      "SourceId": "PBRmatsWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\wwwroot\\",
+      "BasePath": "_content/PBRmatsWeb",
+      "RelativePath": "Uploads/Material/zips/test2.zip",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\Material\\zips\\test2.zip"
     }
   ]
 }

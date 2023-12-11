@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using PBRmats.Core.Entities;
 using PBRmats.Repositories.Interfaces;
 using Newtonsoft.Json;
+using System.IO;
+using Microsoft.IdentityModel.Tokens;
 
 namespace PBRmatsWeb.Controllers
 {
@@ -25,18 +27,21 @@ namespace PBRmatsWeb.Controllers
         private readonly IListService<Category> _categoryService;
         private readonly IListService<License> _licenseService;
         private readonly IWebHostEnvironment _environment;
+        private readonly ILogger<MaterialController> _logger;
 
         public MaterialController(IRepository<Material, int> materialRepository,
                                     IRepository<Tag, int> tagRepository,
                                     IListService<Category> categoryService,
                                     IListService<License> licenseService,
-                                    IWebHostEnvironment environment)
+                                    IWebHostEnvironment environment,
+                                    ILogger<MaterialController> logger)
         {
             _materialRepository = materialRepository;
             _tagRepository = tagRepository;
             _categoryService = categoryService;
             _licenseService = licenseService;
             _environment = environment;
+            _logger = logger;
         }
 
         public IActionResult Index()
@@ -63,8 +68,11 @@ namespace PBRmatsWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Material material, IFormFile MaterialImage, string MaterialTags)
+        public async Task<IActionResult> Create(Material material, IFormFile? MaterialImage, IFormFile? MaterialZipFile, string MaterialTags)
         {
+            if (MaterialZipFile != null && MaterialZipFile.Length > 0)
+                material.ZipFileUrl = await SaveMaterialZipFileAsync(MaterialZipFile);
+
             material.ImageUrl = await SaveMaterialImageAsync(MaterialImage);
 
             ParseAndAddTags(material, MaterialTags);
@@ -74,23 +82,48 @@ namespace PBRmatsWeb.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        private async Task<string> SaveMaterialZipFileAsync(IFormFile? materialZipFile)
+        {
+            if (materialZipFile == null)
+                return Path.Combine("/uploads/Material/zips/", materialZipFile.FileName); // Return the relative path
+            
+            var uploadsFolderPath = Path.Combine(_environment.WebRootPath, "uploads", "Material", "zips");
+            if (!Directory.Exists(uploadsFolderPath))
+                Directory.CreateDirectory(uploadsFolderPath);
+
+            var filePath = Path.Combine(uploadsFolderPath, materialZipFile.FileName);
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await materialZipFile.CopyToAsync(fileStream);
+            }
+
+            return Path.Combine("/uploads/Material/zips/", materialZipFile.FileName); // Return the relative path
+        }
+
         public IActionResult Edit(int id)
         {
             PopulateDropdowns();
 
             var material = _materialRepository.Get(id);
 
-            if (material == null)
-                return NotFound();
-
             return View(material);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Material material, IFormFile MaterialImage, string MaterialTags)
+        public async Task<IActionResult> Edit(Material material, IFormFile? MaterialImage, IFormFile? MaterialZipFile, string MaterialTags)
         {
-            material.ImageUrl = await SaveMaterialImageAsync(MaterialImage, material.ImageUrl);
+            if (MaterialZipFile != null)
+            {
+                DeleteMaterialZipFile(material.ZipFileUrl);
 
+                material.ZipFileUrl = await SaveMaterialZipFileAsync(MaterialZipFile);
+            }
+            else
+            {
+                material.ZipFileUrl = string.Empty;
+            }
+
+            material.ImageUrl = await SaveMaterialImageAsync(MaterialImage, material.ImageUrl);
             ParseAndAddTags(material, MaterialTags);
 
             _materialRepository.Update(material);
@@ -112,7 +145,7 @@ namespace PBRmatsWeb.Controllers
 
             foreach (var title in tags)
             {
-                var existingTag = existingTags.FirstOrDefault(t => t.Title.ToLower() == title.ToLower());
+                var existingTag = existingTags.FirstOrDefault(t => string.Equals(t.Title, title, StringComparison.CurrentCultureIgnoreCase));
                 if (existingTag == null)
                 {
                     existingTag = new Tag { Title = title };
@@ -146,18 +179,42 @@ namespace PBRmatsWeb.Controllers
 
         public IActionResult Delete(int id)
         {
-            return View(_materialRepository.Get(id));
+            var material = _materialRepository.Get(id);
+            if (material == null)
+                return NotFound();
+
+            return View(material);
+        }
+
+        private void DeleteMaterialZipFile(string zipFileUrl)
+        {
+            if (string.IsNullOrEmpty(zipFileUrl))
+                return;
+
+            var filePath = Path.Combine(_environment.WebRootPath, zipFileUrl.TrimStart('/'));
+            try
+            {
+                if (System.IO.File.Exists(filePath))
+                {
+                    System.IO.File.Delete(filePath);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error deleting file {FilePath}", filePath);
+            }
         }
 
         [HttpPost]
         public IActionResult Delete(Material material)
         {
+            DeleteMaterialZipFile(material.ZipFileUrl);
             _materialRepository.Delete(material);
 
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
 
-        private async Task<string> SaveMaterialImageAsync(IFormFile materialImage, string currentImageUrl = null)
+        private async Task<string> SaveMaterialImageAsync(IFormFile? materialImage, string currentImageUrl = null)
         {
             // If an image is uploaded
             if (materialImage != null)

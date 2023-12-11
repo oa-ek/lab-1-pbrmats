@@ -67,6 +67,24 @@
             </div>
 
             <div class="form-group">
+                <label for="MaterialZipFile" class="control-label">Upload ZIP File</label>
+                <input type="file" name="MaterialZipFile" class="form-control" accept=".zip" />
+            </div>
+            <div class="form-group">
+                <label>Current ZIP File</label>
+                @if (!string.IsNullOrEmpty(Model.ZipFileUrl))
+                {
+                    <div>
+                        <a href="@Model.ZipFileUrl" target="_blank">@Model.ZipFileUrl</a>
+                    </div>
+                }
+                else
+                {
+                    <div>No ZIP file currently associated with this material.</div>
+                }
+            </div>
+
+            <div class="form-group">
                 <label for="MaterialImage">Material Image</label>
                 <input type="file" name="MaterialImage" id="MaterialImage" class="form-control" onchange="previewImage();" />
             </div>

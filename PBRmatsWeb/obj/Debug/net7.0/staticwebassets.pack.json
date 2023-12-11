@@ -53,6 +53,10 @@
       "PackagePath": "staticwebassets\\Uploads\\Material\\CarPaint.jpeg"
     },
     {
+      "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\wwwroot\\Uploads\\Material\\_1a664268-c58e-4bea-943b-ed6a2bacb1e5.jpg",
+      "PackagePath": "staticwebassets\\Uploads\\Material\\_1a664268-c58e-4bea-943b-ed6a2bacb1e5.jpg"
+    },
+    {
       "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\wwwroot\\Uploads\\Material\\c1730508-d44d-4f4b-a59a-d5b70465e85e.jpeg",
       "PackagePath": "staticwebassets\\Uploads\\Material\\c1730508-d44d-4f4b-a59a-d5b70465e85e.jpeg"
     },
@@ -67,6 +71,14 @@
     {
       "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\wwwroot\\Uploads\\Material\\ebd011e5-48bf-4b5e-b1c9-374a56b284a8.jpeg",
       "PackagePath": "staticwebassets\\Uploads\\Material\\ebd011e5-48bf-4b5e-b1c9-374a56b284a8.jpeg"
+    },
+    {
+      "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\wwwroot\\Uploads\\Material\\zips\\test.zip",
+      "PackagePath": "staticwebassets\\Uploads\\Material\\zips\\test.zip"
+    },
+    {
+      "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\wwwroot\\Uploads\\Material\\zips\\test2.zip",
+      "PackagePath": "staticwebassets\\Uploads\\Material\\zips\\test2.zip"
     },
     {
       "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\wwwroot\\Uploads\\defaultMaterial.webp",

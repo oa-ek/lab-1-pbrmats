@@ -20,8 +20,8 @@ namespace PBRmats.Core.Entities
         [ForeignKey("License")]
         public int LicenseId { get; set; }
         public virtual License License { get; set; }
-        [Required]
         public string ImageUrl { get; set; }
+        public string ZipFileUrl { get; set; }
         public ICollection<MaterialTag> MaterialTags { get; set; }
         public ICollection<MaterialMaterialsCollection> MaterialMaterialsCollection { get; set; }
     }

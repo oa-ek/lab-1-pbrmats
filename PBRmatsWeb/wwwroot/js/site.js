@@ -208,6 +208,8 @@ $(document).on('click', '.material-card', function() {
     var materialLicense = $(this).data('material-license');
     var materialDate = $(this).data('material-date');
 
+    var zipFileUrl = $(this).data('zip-file-url');
+
     $('#selectedMaterialId').val(selectedMaterialId);
     $('#modalMaterialTitle').text(materialTitle);
     $('#modalMaterialImage').attr('src', materialImage);
@@ -224,4 +226,6 @@ $(document).on('click', '.material-card', function() {
     $('#modalMaterialCategory').text('Category: ' + materialCategory);
     $('#modalMaterialLicense').text('License: ' + materialLicense);
     $('#modalMaterialDate').text('Release Date: ' + materialDate);
+
+    $('#modalDownloadZipButton').attr('href', zipFileUrl).attr('download', 'material.zip');
 });
