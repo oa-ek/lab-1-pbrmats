@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3k5QaTuiahF4alAD8AEPC3PD2k2aBpwKmXXXV/2wQK6vVZ5ILqgE18m2YdThkZgrB2i7nhE/EEQQRqHoKwTLOQ==",
+  "dgSpecHash": "VvBSgSQdwEbHdCjn41x0AIsthAh1NxxfQLh6hGlHVcEMVI03oh3n5o+6HnqenBNgVQWzxDkYmWvOMWpzWSdmRg==",
   "success": true,
-  "projectFilePath": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats.Repositories\\PBRmats.Repositories.csproj",
+  "projectFilePath": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats.Repositories\\PBRmats.Persistence.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\valer\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\valer\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

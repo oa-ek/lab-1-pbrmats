@@ -4023,7 +4023,7 @@
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
       },
-      "PBRmats.Core/1.0.0": {
+      "PBRmats.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
@@ -4032,23 +4032,23 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.11"
         },
         "compile": {
-          "bin/placeholder/PBRmats.Core.dll": {}
+          "bin/placeholder/PBRmats.Domain.dll": {}
         },
         "runtime": {
-          "bin/placeholder/PBRmats.Core.dll": {}
+          "bin/placeholder/PBRmats.Domain.dll": {}
         }
       },
-      "PBRmats.Repositories/1.0.0": {
+      "PBRmats.Persistence/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
-          "PBRmats.Core": "1.0.0"
+          "PBRmats.Domain": "1.0.0"
         },
         "compile": {
-          "bin/placeholder/PBRmats.Repositories.dll": {}
+          "bin/placeholder/PBRmats.Persistence.dll": {}
         },
         "runtime": {
-          "bin/placeholder/PBRmats.Repositories.dll": {}
+          "bin/placeholder/PBRmats.Persistence.dll": {}
         }
       }
     }
@@ -11671,15 +11671,15 @@
         "system.xml.xdocument.nuspec"
       ]
     },
-    "PBRmats.Core/1.0.0": {
+    "PBRmats.Domain/1.0.0": {
       "type": "project",
-      "path": "../Core/PBRmats.Core.csproj",
-      "msbuildProject": "../Core/PBRmats.Core.csproj"
+      "path": "../Core/PBRmats.Domain.csproj",
+      "msbuildProject": "../Core/PBRmats.Domain.csproj"
     },
-    "PBRmats.Repositories/1.0.0": {
+    "PBRmats.Persistence/1.0.0": {
       "type": "project",
-      "path": "../PBRmats.Repositories/PBRmats.Repositories.csproj",
-      "msbuildProject": "../PBRmats.Repositories/PBRmats.Repositories.csproj"
+      "path": "../PBRmats.Repositories/PBRmats.Persistence.csproj",
+      "msbuildProject": "../PBRmats.Repositories/PBRmats.Persistence.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -11690,8 +11690,8 @@
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.11",
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.11",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 7.0.10",
-      "PBRmats.Core >= 1.0.0",
-      "PBRmats.Repositories >= 1.0.0"
+      "PBRmats.Domain >= 1.0.0",
+      "PBRmats.Persistence >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -11701,9 +11701,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\PBRmatsWeb.csproj",
-      "projectName": "PBRmatsWeb",
-      "projectPath": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\PBRmatsWeb.csproj",
+      "projectUniqueName": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\PBRmats.Web.csproj",
+      "projectName": "PBRmats.Web",
+      "projectPath": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\PBRmats.Web.csproj",
       "packagesPath": "C:\\Users\\valer\\.nuget\\packages\\",
       "outputPath": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\obj\\",
       "projectStyle": "PackageReference",
@@ -11727,11 +11727,11 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "D:\\Study\\C#\\lab-1-pbrmats\\Core\\PBRmats.Core.csproj": {
-              "projectPath": "D:\\Study\\C#\\lab-1-pbrmats\\Core\\PBRmats.Core.csproj"
+            "D:\\Study\\C#\\lab-1-pbrmats\\Core\\PBRmats.Domain.csproj": {
+              "projectPath": "D:\\Study\\C#\\lab-1-pbrmats\\Core\\PBRmats.Domain.csproj"
             },
-            "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats.Repositories\\PBRmats.Repositories.csproj": {
-              "projectPath": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats.Repositories\\PBRmats.Repositories.csproj"
+            "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats.Repositories\\PBRmats.Persistence.csproj": {
+              "projectPath": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats.Repositories\\PBRmats.Persistence.csproj"
             }
           }
         }

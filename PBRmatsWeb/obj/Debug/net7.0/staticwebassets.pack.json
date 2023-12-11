@@ -1,8 +1,8 @@
 {
   "Files": [
     {
-      "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\PBRmatsWeb.bundle.scp.css",
-      "PackagePath": "staticwebassets\\PBRmatsWeb.bundle.scp.css"
+      "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\PBRmats.Web.bundle.scp.css",
+      "PackagePath": "staticwebassets\\PBRmats.Web.bundle.scp.css"
     },
     {
       "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmatsWeb\\wwwroot\\Uploads\\Material\\09a87114-b6dd-4dee-a822-f47af9fe8efd.jpeg",
@@ -325,20 +325,20 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
-      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.PBRmatsWeb.Microsoft.AspNetCore.StaticWebAssets.props",
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.PBRmats.Web.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },
     {
-      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.PBRmatsWeb.props",
-      "PackagePath": "build\\PBRmatsWeb.props"
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.PBRmats.Web.props",
+      "PackagePath": "build\\PBRmats.Web.props"
     },
     {
-      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.PBRmatsWeb.props",
-      "PackagePath": "buildMultiTargeting\\PBRmatsWeb.props"
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.PBRmats.Web.props",
+      "PackagePath": "buildMultiTargeting\\PBRmats.Web.props"
     },
     {
-      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.PBRmatsWeb.props",
-      "PackagePath": "buildTransitive\\PBRmatsWeb.props"
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.PBRmats.Web.props",
+      "PackagePath": "buildTransitive\\PBRmats.Web.props"
     }
   ],
   "ElementsToRemove": []

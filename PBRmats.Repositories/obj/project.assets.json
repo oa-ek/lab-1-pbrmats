@@ -1043,7 +1043,7 @@
           }
         }
       },
-      "PBRmats.Core/1.0.0": {
+      "PBRmats.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
@@ -1052,10 +1052,10 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.11"
         },
         "compile": {
-          "bin/placeholder/PBRmats.Core.dll": {}
+          "bin/placeholder/PBRmats.Domain.dll": {}
         },
         "runtime": {
-          "bin/placeholder/PBRmats.Core.dll": {}
+          "bin/placeholder/PBRmats.Domain.dll": {}
         }
       }
     }
@@ -2798,15 +2798,15 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "PBRmats.Core/1.0.0": {
+    "PBRmats.Domain/1.0.0": {
       "type": "project",
-      "path": "../Core/PBRmats.Core.csproj",
-      "msbuildProject": "../Core/PBRmats.Core.csproj"
+      "path": "../Core/PBRmats.Domain.csproj",
+      "msbuildProject": "../Core/PBRmats.Domain.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net7.0": [
-      "PBRmats.Core >= 1.0.0"
+      "PBRmats.Domain >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -2816,9 +2816,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats.Repositories\\PBRmats.Repositories.csproj",
-      "projectName": "PBRmats.Repositories",
-      "projectPath": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats.Repositories\\PBRmats.Repositories.csproj",
+      "projectUniqueName": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats.Repositories\\PBRmats.Persistence.csproj",
+      "projectName": "PBRmats.Persistence",
+      "projectPath": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats.Repositories\\PBRmats.Persistence.csproj",
       "packagesPath": "C:\\Users\\valer\\.nuget\\packages\\",
       "outputPath": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats.Repositories\\obj\\",
       "projectStyle": "PackageReference",
@@ -2842,8 +2842,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "D:\\Study\\C#\\lab-1-pbrmats\\Core\\PBRmats.Core.csproj": {
-              "projectPath": "D:\\Study\\C#\\lab-1-pbrmats\\Core\\PBRmats.Core.csproj"
+            "D:\\Study\\C#\\lab-1-pbrmats\\Core\\PBRmats.Domain.csproj": {
+              "projectPath": "D:\\Study\\C#\\lab-1-pbrmats\\Core\\PBRmats.Domain.csproj"
             }
           }
         }

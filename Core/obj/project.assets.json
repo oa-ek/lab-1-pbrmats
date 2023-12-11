@@ -3065,9 +3065,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Study\\C#\\lab-1-pbrmats\\Core\\PBRmats.Core.csproj",
-      "projectName": "PBRmats.Core",
-      "projectPath": "D:\\Study\\C#\\lab-1-pbrmats\\Core\\PBRmats.Core.csproj",
+      "projectUniqueName": "D:\\Study\\C#\\lab-1-pbrmats\\Core\\PBRmats.Domain.csproj",
+      "projectName": "PBRmats.Domain",
+      "projectPath": "D:\\Study\\C#\\lab-1-pbrmats\\Core\\PBRmats.Domain.csproj",
       "packagesPath": "C:\\Users\\valer\\.nuget\\packages\\",
       "outputPath": "D:\\Study\\C#\\lab-1-pbrmats\\Core\\obj\\",
       "projectStyle": "PackageReference",
