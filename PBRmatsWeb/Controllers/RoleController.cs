@@ -16,9 +16,6 @@ namespace PBRmatsWeb.Controllers
             _roleManager = roleManager;
         }
 
-        // Implement your action methods to change roles for ASP.NET users here
-        // For example, you can have a method to add a user to a role, remove from a role, etc.
-
         public async Task<IActionResult> AddToRole(string userId, string roleName)
         {
             var user = await _userManager.FindByIdAsync(userId);
@@ -39,7 +36,6 @@ namespace PBRmatsWeb.Controllers
                 ModelState.AddModelError(string.Empty, "User not found.");
             }
 
-            // Redirect to a relevant view or action
             return RedirectToAction("Index");
         }
 
@@ -63,7 +59,6 @@ namespace PBRmatsWeb.Controllers
                 ModelState.AddModelError(string.Empty, "User not found.");
             }
 
-            // Redirect to a relevant view or action
             return RedirectToAction("Index");
         }
 

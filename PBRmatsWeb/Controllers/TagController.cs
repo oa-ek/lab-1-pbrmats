@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PBRmats.Application.DTOs;
 using PBRmats.Core.Entities;
 using PBRmats.Repositories.Interfaces;
+using System.ComponentModel;
 
 namespace PBRmatsWeb.Controllers
 {
@@ -10,28 +12,39 @@ namespace PBRmatsWeb.Controllers
     {
         private readonly IRepository<Tag, int> _tagRepository;
 
-        public TagController(IRepository<Tag, int> tagRepository)
-        {
+        public TagController(IRepository<Tag, int> tagRepository) => 
             _tagRepository = tagRepository;
+
+        private Tag GetTag(int id) =>
+            _tagRepository.Get(id);
+
+        private TagDTO SetDTO(int id)
+        {
+            var tagEntity = GetTag(id);
+
+            return new TagDTO() { Id = tagEntity.Id, Title = tagEntity.Title };
         }
 
-        public IActionResult Index()
-        {
-            return View(_tagRepository.GetAll());
-        }
+        public IActionResult Index() =>
+            View(_tagRepository.GetAll());
 
         [HttpGet]
-        public IActionResult Create()
-        {
-            return View("Create");
-        }
+        public IActionResult Create() =>
+            View("Create");
+
+        public IActionResult Edit(int id) =>
+            View(SetDTO(id));
+
+        public IActionResult Delete(int id) =>
+            View(SetDTO(id));
 
         [HttpPost]
-        public IActionResult Create(Tag tag)
+        public IActionResult Create(TagDTO tag)
         {
             if (ModelState.IsValid)
             {
-                _tagRepository.Create(tag);
+                var newTag = new Tag() { Title = tag.Title, MaterialTags = null};
+                _tagRepository.Create(newTag);
 
                 return RedirectToAction("Index");
             }
@@ -39,28 +52,21 @@ namespace PBRmatsWeb.Controllers
             return View();
         }
 
-        public IActionResult Delete(int id)
-        {
-            return View(_tagRepository.Get(id));
-        }
-
         [HttpPost]
-        public IActionResult Delete(Tag tag)
+        public IActionResult Edit(TagDTO tag)
         {
-            _tagRepository.Delete(tag);
+            var tagToEdit = GetTag(tag.Id);
+            tagToEdit.Title = tag.Title;
+            _tagRepository.Update(tagToEdit);
 
             return RedirectToAction("Index");
         }
 
-        public IActionResult Edit(int id)
-        {
-            return View(_tagRepository.Get(id));
-        }
-
         [HttpPost]
-        public IActionResult Edit(Tag tag)
+        public IActionResult Delete(TagDTO tag)
         {
-            _tagRepository.Update(tag);
+            var tagToEdit = GetTag(tag.Id);
+            _tagRepository.Delete(tagToEdit);
 
             return RedirectToAction("Index");
         }
