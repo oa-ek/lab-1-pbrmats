@@ -12,19 +12,19 @@ namespace PBRmatsWeb.Controllers
     {
         private readonly IRepository<Material, int> _materialRepository;
         private readonly IRepository<MaterialsCollection, int> _collectionRepository;
-        private readonly IListService<Category> _categoryService;
-        private readonly IListService<License> _licenseService;
+        private readonly IRepository<Category, int> _categoryRepository;
+        private readonly IRepository<License, int> _licenseRepository;
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(IRepository<Material, int> materialRepository,
                                 IRepository<MaterialsCollection, int> collectionRepository,
-                                IListService<Category> categoryService, 
-                                IListService<License> licenseService)
+                                IRepository<Category, int> categoryRepository,
+                                IRepository<License, int> licenseRepository)
         {
             _materialRepository = materialRepository;
             _collectionRepository = collectionRepository;
-            _categoryService = categoryService;
-            _licenseService = licenseService;
+            _categoryRepository = categoryRepository;
+            _licenseRepository = licenseRepository;
         }
 
         public async Task<IActionResult> Index([FromServices] UserManager<IdentityUser> userManager,
@@ -70,8 +70,8 @@ namespace PBRmatsWeb.Controllers
             if (licenseSort.HasValue)
                 materialsQuery = materialsQuery.Where(material => material.LicenseId == licenseSort);
 
-            var categories = _categoryService.GetList();
-            var licenses = _licenseService.GetList();
+            var categories = _categoryRepository.GetAll();
+            var licenses = _licenseRepository.GetAll();
 
             switch (sortBy)
             {
@@ -110,8 +110,8 @@ namespace PBRmatsWeb.Controllers
 
         private void GetData()
         {
-            ViewData["Categories"] = _categoryService.GetList();
-            ViewData["Licenses"] = _licenseService.GetList();
+            ViewData["Categories"] = _categoryRepository.GetAll();
+            ViewData["Licenses"] = _licenseRepository.GetAll();
         }
     }
 }

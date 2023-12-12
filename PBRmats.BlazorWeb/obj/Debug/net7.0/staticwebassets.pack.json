@@ -1,0 +1,97 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats.BlazorWeb\\bin\\Debug\\net7.0\\wwwroot\\_framework\\blazor.webassembly.js",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js"
+    },
+    {
+      "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats.BlazorWeb\\obj\\Debug\\net7.0\\build-gz\\1tPy0aJe.gz",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js.gz"
+    },
+    {
+      "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats.BlazorWeb\\obj\\Debug\\net7.0\\scopedcss\\bundle\\PBRmats.BlazorWeb.styles.css",
+      "PackagePath": "staticwebassets\\PBRmats.BlazorWeb.styles.css"
+    },
+    {
+      "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats.BlazorWeb\\wwwroot\\css\\app.css",
+      "PackagePath": "staticwebassets\\css\\app.css"
+    },
+    {
+      "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats.BlazorWeb\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats.BlazorWeb\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats.BlazorWeb\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
+      "PackagePath": "staticwebassets\\css\\open-iconic"
+    },
+    {
+      "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats.BlazorWeb\\wwwroot\\css\\open-iconic\\ICON-LICENSE",
+      "PackagePath": "staticwebassets\\css\\open-iconic"
+    },
+    {
+      "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats.BlazorWeb\\wwwroot\\css\\open-iconic\\README.md",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\README.md"
+    },
+    {
+      "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats.BlazorWeb\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats.BlazorWeb\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.eot"
+    },
+    {
+      "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats.BlazorWeb\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.otf"
+    },
+    {
+      "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats.BlazorWeb\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.svg"
+    },
+    {
+      "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats.BlazorWeb\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.ttf"
+    },
+    {
+      "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats.BlazorWeb\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.woff"
+    },
+    {
+      "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats.BlazorWeb\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats.BlazorWeb\\wwwroot\\icon-192.png",
+      "PackagePath": "staticwebassets\\icon-192.png"
+    },
+    {
+      "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats.BlazorWeb\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "D:\\Study\\C#\\lab-1-pbrmats\\PBRmats.BlazorWeb\\wwwroot\\sample-data\\weather.json",
+      "PackagePath": "staticwebassets\\sample-data\\weather.json"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.PBRmats.BlazorWeb.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.PBRmats.BlazorWeb.props",
+      "PackagePath": "build\\PBRmats.BlazorWeb.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.PBRmats.BlazorWeb.props",
+      "PackagePath": "buildMultiTargeting\\PBRmats.BlazorWeb.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.PBRmats.BlazorWeb.props",
+      "PackagePath": "buildTransitive\\PBRmats.BlazorWeb.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

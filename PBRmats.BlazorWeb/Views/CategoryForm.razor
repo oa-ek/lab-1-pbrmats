@@ -1,0 +1,65 @@
+﻿@page "/categories/{action}/{Id?}"
+@using PBRmats.BlazorWeb.Services;
+@using PBRmats.Core.Entities;
+@inject CategoryService CategoryService
+@inject NavigationManager NavigationManager
+
+<h3>@(Action == "create" ? "Create" : "Edit") Category</h3>
+
+@if (category != null)
+{
+    <form>
+        <label for="title">Title:</label>
+        <input type="text" id="title" @bind="category.Title" />
+        <br />
+        <button @onclick="SaveCategory">Save</button>
+    </form>
+}
+else
+{
+    <p>@(Action == "edit" ? "Loading..." : "")</p>
+}
+
+@code {
+    [Parameter] public string Action { get; set; }
+    [Parameter] public string Id { get; set; }
+
+    Category category;
+    bool isLoading = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Action == "create")
+        {
+            category = new Category();
+        }
+        else if (Action == "edit")
+        {
+            isLoading = true;
+            category = await CategoryService.GetCategoryByIdAsync(int.Parse(Id));
+            isLoading = false;
+        }
+    }
+
+    async Task SaveCategory()
+    {
+        try
+        {
+            if (Action == "create")
+            {
+                await CategoryService.AddCategoryAsync(category);
+            }
+            else if (Action == "edit")
+            {
+                await CategoryService.UpdateCategoryAsync(int.Parse(Id), category);
+            }
+
+            NavigationManager.NavigateTo("/categories", forceLoad: true);
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+    }
+}

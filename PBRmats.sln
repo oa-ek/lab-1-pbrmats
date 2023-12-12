@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PBRmats.Persistence", "PBRm
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5891C1A0-125D-4F76-865B-94716284E06F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PBRmats.Application", "PBRmats.UseCases\PBRmats.Application.csproj", "{C8C7947F-03E7-41D4-9703-256AD55BD585}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PBRmats.Application", "PBRmats.UseCases\PBRmats.Application.csproj", "{C8C7947F-03E7-41D4-9703-256AD55BD585}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PBRmats.BlazorWeb", "PBRmats.BlazorWeb\PBRmats.BlazorWeb.csproj", "{9EF1ABC9-A53B-4DE2-BAE7-DD77AE1DBB57}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{C8C7947F-03E7-41D4-9703-256AD55BD585}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8C7947F-03E7-41D4-9703-256AD55BD585}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8C7947F-03E7-41D4-9703-256AD55BD585}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EF1ABC9-A53B-4DE2-BAE7-DD77AE1DBB57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EF1ABC9-A53B-4DE2-BAE7-DD77AE1DBB57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EF1ABC9-A53B-4DE2-BAE7-DD77AE1DBB57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EF1ABC9-A53B-4DE2-BAE7-DD77AE1DBB57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +50,7 @@ Global
 		{51C4517B-5BB3-4805-BF66-F7A2EC369970} = {5891C1A0-125D-4F76-865B-94716284E06F}
 		{0C18FD03-0062-4597-B3E4-E9E6BEF4E9BC} = {5891C1A0-125D-4F76-865B-94716284E06F}
 		{C8C7947F-03E7-41D4-9703-256AD55BD585} = {5891C1A0-125D-4F76-865B-94716284E06F}
+		{9EF1ABC9-A53B-4DE2-BAE7-DD77AE1DBB57} = {5891C1A0-125D-4F76-865B-94716284E06F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {33797D67-B38C-44F3-A4B1-39D2BB356049}

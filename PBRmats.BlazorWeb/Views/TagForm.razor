@@ -1,0 +1,69 @@
+﻿@page "/tags/{action}/{Id?}"
+@using PBRmats.BlazorWeb.Services;
+@using PBRmats.Core.Entities;
+@inject TagService TagService
+@inject NavigationManager NavigationManager
+
+<h3>@(Action == "create" ? "Create" : "Edit") Tag</h3>
+
+@if (tag != null)
+{
+    <form>
+        <label for="title">Title:</label>
+        <input type="text" id="title" @bind="tag.Title" />
+        <br />
+        <button @onclick="SaveTag">Save</button>
+    </form>
+}
+else
+{
+    <p>@(Action == "edit" ? "Loading..." : "")</p>
+}
+
+@code {
+    [Parameter] public string Action { get; set; }
+    [Parameter] public string Id { get; set; }
+
+    Tag tag;
+    bool isLoading = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Action == "create")
+        {
+            tag = new Tag();
+        }
+        else if (Action == "edit")
+        {
+            isLoading = true;
+            tag = await TagService.GetTagByIdAsync(int.Parse(Id));
+            isLoading = false;
+        }
+    }
+
+    async Task SaveTag()
+    {
+        try
+        {
+            Console.WriteLine($"Action: {Action}, Id: {Id}");
+
+            if (Action == "create")
+            {
+                await TagService.AddTagAsync(tag);
+            }
+            else if (Action == "edit")
+            {
+                Console.WriteLine($"Updating tag with ID: {Id}");
+                await TagService.UpdateTagAsync(int.Parse(Id), tag);
+            }
+
+            Console.WriteLine("Navigation to /tags");
+            NavigationManager.NavigateTo("/tags", forceLoad: true);
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+    }
+}

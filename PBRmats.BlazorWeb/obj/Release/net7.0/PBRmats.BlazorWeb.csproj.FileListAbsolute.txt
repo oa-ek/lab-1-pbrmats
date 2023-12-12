@@ -1,0 +1,6 @@
+D:\Study\C#\lab-1-pbrmats\PBRmats.BlazorWeb\obj\Release\net7.0\PBRmats.BlazorWeb.csproj.AssemblyReference.cache
+D:\Study\C#\lab-1-pbrmats\PBRmats.BlazorWeb\obj\Release\net7.0\PBRmats.BlazorWeb.GeneratedMSBuildEditorConfig.editorconfig
+D:\Study\C#\lab-1-pbrmats\PBRmats.BlazorWeb\obj\Release\net7.0\PBRmats.BlazorWeb.AssemblyInfoInputs.cache
+D:\Study\C#\lab-1-pbrmats\PBRmats.BlazorWeb\obj\Release\net7.0\PBRmats.BlazorWeb.AssemblyInfo.cs
+D:\Study\C#\lab-1-pbrmats\PBRmats.BlazorWeb\obj\Release\net7.0\PBRmats.BlazorWeb.csproj.CoreCompileInputs.cache
+D:\Study\C#\lab-1-pbrmats\PBRmats.BlazorWeb\obj\Release\net7.0\PBRmats.BlazorWeb.MvcApplicationPartsAssemblyInfo.cache

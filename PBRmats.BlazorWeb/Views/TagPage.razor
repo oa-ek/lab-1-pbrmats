@@ -1,0 +1,57 @@
+﻿@page "/tags"
+@using PBRmats.BlazorWeb.Services;
+@using PBRmats.Core.Entities;
+@inject TagService TagService
+@inject NavigationManager NavigationManager
+
+<h3>Tag Page</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var tag in tags)
+        {
+            <tr>
+                <td>@tag.Id</td>
+                <td>@tag.Title</td>
+                <td>
+                    <button @onclick="() => EditTag(tag.Id)">Edit</button>
+                    <button @onclick="() => DeleteTag(tag.Id)">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<button @onclick="CreateTag">Create Tag</button>
+
+@code {
+    List<Tag> tags;
+
+    protected override async Task OnInitializedAsync()
+    {
+        tags = await TagService.GetTagsAsync();
+    }
+
+    void CreateTag()
+    {
+        NavigationManager.NavigateTo("/tags/create");
+    }
+
+    void EditTag(int id)
+    {
+        NavigationManager.NavigateTo($"/tags/edit/{id}");
+    }
+
+    async void DeleteTag(int id)
+    {
+        await TagService.DeleteTagAsync(id);
+        tags = await TagService.GetTagsAsync();
+    }
+}

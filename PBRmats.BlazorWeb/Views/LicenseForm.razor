@@ -1,0 +1,69 @@
+﻿@page "/licenses/{action}/{Id?}"
+@using PBRmats.BlazorWeb.Services;
+@using PBRmats.Core.Entities;
+@using PBRmats.Repositories.Interfaces;
+
+@inject LicenseService LicenseService
+@inject NavigationManager NavigationManager
+
+<h3>@(Action == "create" ? "Create" : "Edit") License</h3>
+
+@if (license != null)
+{
+    <form>
+        <label for="title">Title:</label>
+        <input type="text" id="title" @bind="license.Title" />
+        <br />
+        <button @onclick="SaveLicense">Save</button>
+    </form>
+}
+else
+{
+    <p>@(Action == "edit" ? "Loading..." : "")</p>
+}
+
+@code {
+    [Parameter] public string Action { get; set; }
+    [Parameter] public string Id { get; set; } // Change the type to string
+
+    License license;
+    bool isLoading = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Action == "create")
+        {
+            license = new License();
+        }
+        else if (Action == "edit")
+        {
+            isLoading = true;
+            license = await LicenseService.GetLicenseByIdAsync(int.Parse(Id)); // Convert the string to int
+            isLoading = false;
+        }
+    }
+
+    async Task SaveLicense()
+    {
+        try
+        {
+            if (Action == "create")
+            {
+                await LicenseService.AddLicenseAsync(license);
+            }
+            else if (Action == "edit")
+            {
+                await LicenseService.UpdateLicenseAsync(int.Parse(Id), license);
+            }
+
+            NavigationManager.NavigateTo("/licenses", forceLoad: true);
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            // Handle or log the exception
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+    }
+}
+

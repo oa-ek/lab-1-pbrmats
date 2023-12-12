@@ -1,0 +1,59 @@
+﻿@page "/licenses"
+@using PBRmats.BlazorWeb.Services;
+@using PBRmats.Core.Entities;
+@using PBRmats.Repositories.Interfaces;
+
+@inject LicenseService LicenseService
+@inject NavigationManager NavigationManager
+
+<h3>License Page</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var license in licenses)
+        {
+            <tr>
+                <td>@license.Id</td>
+                <td>@license.Title</td>
+                <td>
+                    <button @onclick="() => EditLicense(license.Id)">Edit</button>
+                    <button @onclick="() => DeleteLicense(license.Id)">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<button @onclick="CreateLicense">Create License</button>
+
+@code {
+    List<License> licenses;
+
+    protected override async Task OnInitializedAsync()
+    {
+        licenses = await LicenseService.GetLicensesAsync();
+    }
+
+    void CreateLicense()
+    {
+        NavigationManager.NavigateTo("/licenses/create");
+    }
+
+    void EditLicense(int id)
+    {
+        NavigationManager.NavigateTo($"/licenses/edit/{id}");
+    }
+
+    async void DeleteLicense(int id)
+    {
+        await LicenseService.DeleteLicenseAsync(id);
+        licenses = await LicenseService.GetLicensesAsync();
+    }
+}

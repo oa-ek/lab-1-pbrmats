@@ -1,0 +1,57 @@
+﻿@page "/categories"
+@using PBRmats.BlazorWeb.Services;
+@using PBRmats.Core.Entities;
+@inject CategoryService CategoryService
+@inject NavigationManager NavigationManager
+
+<h3>Category Page</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in categories)
+        {
+            <tr>
+                <td>@category.Id</td>
+                <td>@category.Title</td>
+                <td>
+                    <button @onclick="() => EditCategory(category.Id)">Edit</button>
+                    <button @onclick="() => DeleteCategory(category.Id)">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<button @onclick="CreateCategory">Create Category</button>
+
+@code {
+    List<Category> categories;
+
+    protected override async Task OnInitializedAsync()
+    {
+        categories = await CategoryService.GetCategoriesAsync();
+    }
+
+    void CreateCategory()
+    {
+        NavigationManager.NavigateTo("/categories/create");
+    }
+
+    void EditCategory(int id)
+    {
+        NavigationManager.NavigateTo($"/categories/edit/{id}");
+    }
+
+    async void DeleteCategory(int id)
+    {
+        await CategoryService.DeleteCategoryAsync(id);
+        categories = await CategoryService.GetCategoriesAsync();
+    }
+}

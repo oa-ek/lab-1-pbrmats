@@ -1,0 +1,73 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = PBRmats.BlazorWeb
+build_property.RootNamespace = PBRmats.BlazorWeb
+build_property.ProjectDir = D:\Study\C#\lab-1-pbrmats\PBRmats.BlazorWeb\
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\Study\C#\lab-1-pbrmats\PBRmats.BlazorWeb
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/Study/C\#/lab-1-pbrmats/PBRmats.BlazorWeb/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Study/C\#/lab-1-pbrmats/PBRmats.BlazorWeb/Pages/Counter.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Study/C\#/lab-1-pbrmats/PBRmats.BlazorWeb/Pages/FetchData.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmV0Y2hEYXRhLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Study/C\#/lab-1-pbrmats/PBRmats.BlazorWeb/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Study/C\#/lab-1-pbrmats/PBRmats.BlazorWeb/Shared/SurveyPrompt.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Study/C\#/lab-1-pbrmats/PBRmats.BlazorWeb/Views/CategoryForm.razor]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlGb3JtLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Study/C\#/lab-1-pbrmats/PBRmats.BlazorWeb/Views/CategoryPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlQYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Study/C\#/lab-1-pbrmats/PBRmats.BlazorWeb/Views/LicenseForm.razor]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGljZW5zZUZvcm0ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Study/C\#/lab-1-pbrmats/PBRmats.BlazorWeb/Views/LicensePage.razor]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGljZW5zZVBhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Study/C\#/lab-1-pbrmats/PBRmats.BlazorWeb/Views/TagForm.razor]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFnRm9ybS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Study/C\#/lab-1-pbrmats/PBRmats.BlazorWeb/Views/TagPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFnUGFnZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Study/C\#/lab-1-pbrmats/PBRmats.BlazorWeb/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Study/C\#/lab-1-pbrmats/PBRmats.BlazorWeb/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-li3j6pcw1z
+
+[D:/Study/C\#/lab-1-pbrmats/PBRmats.BlazorWeb/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-y06xykxmyy
