@@ -32,7 +32,7 @@
 <button @onclick="CreateCategory">Create Category</button>
 
 @code {
-    List<Category> categories;
+    List<Category> categories = new();
 
     protected override async Task OnInitializedAsync()
     {

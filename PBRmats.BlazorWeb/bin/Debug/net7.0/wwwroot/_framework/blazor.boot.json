@@ -239,7 +239,7 @@
       "PBRmats.Application.dll": "sha256-SMsuoQ2ykJkhbpZoZgOgrm\/V9dbWWh5zEjJLsceZf2M=",
       "PBRmats.Domain.dll": "sha256-+7BZBb+QAEB1x\/m5H7JpYOoBquG0iMNBw8aiz+gvUeQ=",
       "PBRmats.Persistence.dll": "sha256-0krJP1cyWNV8zXkZ82uGHwFZRO2enthCFBjR2rhqbdk=",
-      "PBRmats.BlazorWeb.dll": "sha256-YtuQG9z0zoziopXZq3DevgdmhuTjn6zLuaBio392MW0="
+      "PBRmats.BlazorWeb.dll": "sha256-ZP+VN3orEjLbbTdySz2htXNIjnq6dNcmErt2oc1JGAw="
     },
     "extensions": null,
     "lazyAssembly": null,
@@ -248,7 +248,7 @@
       "PBRmats.Domain.pdb": "sha256-MyIvjCijEk7+bVc328bNKcSmGkJ3jHUwtNIkjSlStCg=",
       "PBRmats.Application.pdb": "sha256-iVihne2tj9rECELqkZbLXuITi4ABwTD\/tgdzDBNAs64=",
       "PBRmats.Persistence.pdb": "sha256-LftfDtTngKLjGsV+zMwnKfRTBibWj58\/kVkLZPl\/7kY=",
-      "PBRmats.BlazorWeb.pdb": "sha256-pnNYeivSxXusQpc6p3TTQtHQ44G43eETGnuLAlQA5\/A="
+      "PBRmats.BlazorWeb.pdb": "sha256-vs+qyVhp0A0oTPq2fBVsVnFXIWHSa9ZZ8oewXU8KN8w="
     },
     "runtime": {
       "dotnet.7.0.10.w9f3p0agxq.js": "sha256-qJB30QURoyH3y3WyayHu6nMFIx2XNOkXCez7tagGpvE=",
