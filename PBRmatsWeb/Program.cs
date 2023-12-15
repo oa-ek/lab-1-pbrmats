@@ -17,8 +17,7 @@ namespace PBRmatsWeb
             var connectionString = builder.Configuration.GetConnectionString("PBRmatsConnection") ?? 
                 throw new InvalidOperationException("Connection string 'PBRmatsConnection' not found.");
 
-            builder.Services.AddDbContext<PBRmatsContext>(options =>
-                options.UseSqlServer(connectionString));
+            builder.Services.AddDbContext<PBRmatsContext>(options => options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             builder.Services.AddControllersWithViews();

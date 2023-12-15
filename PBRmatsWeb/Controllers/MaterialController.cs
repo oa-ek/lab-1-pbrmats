@@ -108,10 +108,8 @@ namespace PBRmatsWeb.Controllers
                 MaterialMaterialsCollection = null
             };
 
-            if (MaterialZipFile != null && MaterialZipFile.Length > 0)
-                material.ZipFileUrl = await SaveMaterialZipFileAsync(MaterialZipFile);
-
-            material.ImageUrl = await SaveMaterialImageAsync(MaterialImage);
+            newMaterial.ImageUrl = await SaveMaterialImageAsync(MaterialImage);
+            newMaterial.ZipFileUrl = await SaveMaterialZipFileAsync(MaterialZipFile);
 
             ParseAndAddTags(newMaterial, MaterialTags);
 
@@ -155,8 +153,8 @@ namespace PBRmatsWeb.Controllers
         private async Task<string> SaveMaterialZipFileAsync(IFormFile? materialZipFile)
         {
             if (materialZipFile == null)
-                return Path.Combine("/uploads/Material/zips/", materialZipFile.FileName); // Return the relative path
-            
+                return "/uploads/Material/zips/default.zip";
+
             var uploadsFolderPath = Path.Combine(_environment.WebRootPath, "uploads", "Material", "zips");
             if (!Directory.Exists(uploadsFolderPath))
                 Directory.CreateDirectory(uploadsFolderPath);
@@ -167,7 +165,7 @@ namespace PBRmatsWeb.Controllers
                 await materialZipFile.CopyToAsync(fileStream);
             }
 
-            return Path.Combine("/uploads/Material/zips/", materialZipFile.FileName); // Return the relative path
+            return Path.Combine("/uploads/Material/zips/", materialZipFile.FileName);
         }
 
         private void ParseAndAddTags(Material material, string MaterialTags)
